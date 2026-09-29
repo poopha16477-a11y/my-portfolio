@@ -7,13 +7,14 @@ import './Activities.css';
 const activitiesData = [
     {
         id: 1,
-        title: 'โครงงาน Quiz App',
+        title: 'เครื่องออกกำลังกายสำหรับขา',
         category: 'project',
-        date: '2566',
-        icon: '🎮',
+        icon: '🦵',
+        image: '/projects/leg-exercise-machine.webp',
         tag: 'Project',
-        description: 'พัฒนา Quiz Application ด้วย React มีระบบคำถาม-คำตอบ ระบบคะแนน และ Timer',
-        detail: 'ใช้เทคนิค State Management, Event Handling และ Component Architecture ที่เรียนจากวิชา Software Development',
+        description: 'เครื่องปั่นขาอัตโนมัติสำหรับผู้สูงอายุและผู้ป่วยที่กล้ามเนื้อขาอ่อนแรง ควบคุมผ่านหน้าจอสัมผัส ปรับความเร็วได้ 5 ระดับ และวัดอัตราการเต้นของหัวใจได้',
+        detail: 'ใช้มอเตอร์ DC 24V 350W ติดเกียร์ ควบคุมความเร็วด้วย PWM ผ่าน Arduino Uno นับรอบการปั่นด้วย Proximity Sensor มี Raspberry Pi เป็น Server กลาง สื่อสารกับอุปกรณ์ผ่าน MQTT ด้วย Python และเก็บข้อมูลผู้ใช้กับสถานะการออกกำลังกายด้วย SQL (โครงงานทีม 2 คน)',
+        tech: ['Arduino', 'Raspberry Pi', 'Python', 'MQTT', 'SQL'],
     },
     {
         id: 2,
@@ -127,14 +128,25 @@ function Activities() {
                                 }
                             }}
                         >
-                            <div className="activity-card-image">
-                                <span className="activity-card-emoji" aria-hidden="true">{item.icon}</span>
+                            <div className={`activity-card-image ${item.image ? 'has-photo' : ''}`}>
+                                {item.image ? (
+                                    <img src={item.image} alt={item.title} className="activity-card-photo" loading="lazy" />
+                                ) : (
+                                    <span className="activity-card-emoji" aria-hidden="true">{item.icon}</span>
+                                )}
                                 <span className="activity-card-tag">{item.tag}</span>
                             </div>
                             <div className="activity-card-body">
-                                <p className="activity-card-date">{item.date}</p>
+                                {item.date && <p className="activity-card-date">{item.date}</p>}
                                 <h3>{item.title}</h3>
                                 <p>{item.description}</p>
+                                {item.tech && (
+                                    <ul className="activity-card-tech">
+                                        {item.tech.map((t) => (
+                                            <li key={t}>{t}</li>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
                             <div className="activity-card-detail">
                                 <div className="activity-card-detail-inner">
