@@ -1,0 +1,87 @@
+/* ===== Shared page header ===== */
+.page-header {
+    position: relative;
+    isolation: isolate;
+    text-align: center;
+    padding: var(--space-md) 0 var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.page-doodles {
+    position: absolute;
+    inset: -20px 0 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.page-doodles .doodle-circle {
+    top: 0;
+    left: 6%;
+}
+
+.page-doodles .doodle-star {
+    top: 12%;
+    right: 12%;
+}
+
+.page-doodles .doodle-star.small {
+    top: auto;
+    bottom: 18%;
+    left: 20%;
+}
+
+.page-doodles .doodle-squiggle {
+    top: auto;
+    bottom: 12%;
+    right: 6%;
+}
+
+.page-doodles .doodle-dots {
+    top: 10%;
+    right: 28%;
+    width: 64px;
+    height: 64px;
+}
+
+.page-header .pill-label {
+    margin-bottom: var(--space-md);
+}
+
+.page-title {
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+}
+
+.page-title .bouncy {
+    position: relative;
+}
+
+.page-title .bouncy::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    bottom: 0.1em;
+    height: 0.24em;
+    background: var(--gold-soft);
+    border-radius: 999px;
+    z-index: -1;
+    transform-origin: left;
+    animation: underline-grow 0.9s 0.5s var(--pop) both;
+}
+
+.page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .page-doodles .doodle-dots,
+    .page-doodles .doodle-squiggle {
+        display: none;
+    }
+}

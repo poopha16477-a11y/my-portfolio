@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import BouncyText from '../components/BouncyText';
+import { splitGraphemes } from '../utils/graphemes';
 import './Home.css';
 
 const ROLES = [
@@ -19,26 +21,6 @@ const STICKERS = [
     { label: 'Dart', className: 'sticker-3' },
     { label: 'Firebase', className: 'sticker-4' },
 ];
-
-// แยกข้อความเป็นตัวอักษร (grapheme) เพื่อให้สระ/วรรณยุกต์ไทยไม่หลุดจากพยัญชนะ
-function splitGraphemes(text) {
-    if (typeof Intl !== 'undefined' && Intl.Segmenter) {
-        return [...new Intl.Segmenter('th', { granularity: 'grapheme' }).segment(text)].map((s) => s.segment);
-    }
-    return [text];
-}
-
-function BouncyText({ text, className = '' }) {
-    return (
-        <span className={`bouncy ${className}`} aria-label={text}>
-            {splitGraphemes(text).map((ch, i) => (
-                <span key={i} className="bouncy-char" style={{ '--i': i }} aria-hidden="true">
-                    {ch === ' ' ? ' ' : ch}
-                </span>
-            ))}
-        </span>
-    );
-}
 
 // ข้อความพิมพ์เอง-ลบเอง วนตาม ROLES
 function useTypewriter(words) {
@@ -115,8 +97,8 @@ function Home() {
 
                 <div className="container hero-content">
                     <div className="hero-text">
-                        <p className="hero-greeting animate-fade-in-up delay-1">
-                            <span className="wave" aria-hidden="true">👋</span> Welcome to my Portfolio
+                        <p className="pill-label animate-fade-in-up delay-1">
+                            <span className="pill-emoji" aria-hidden="true">👋</span> Welcome to my Portfolio
                         </p>
                         <h1 className="hero-name animate-fade-in-up delay-2">
                             <BouncyText text="ภูผา" />{' '}

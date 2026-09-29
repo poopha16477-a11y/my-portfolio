@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PageHeader from '../components/PageHeader';
 import './Activities.css';
 
 // ข้อมูลกิจกรรม (สามารถแก้ไขได้ตามต้องการ)
@@ -85,19 +86,16 @@ function Activities() {
     return (
         <div className="activities-page">
             <div className="container section">
-                <div className="activities-header">
-                    <span className="section-label animate-fade-in-up">กิจกรรม</span>
-                    <h2 className="section-title animate-fade-in-up delay-1" style={{ textAlign: 'center' }}>
-                        Activities
-                    </h2>
-                    <p className="animate-fade-in-up delay-2">กิจกรรมและโปรเจคที่ฉันเคยเข้าร่วมและทำ</p>
-                </div>
+                <PageHeader emoji="🚀" label="กิจกรรม" title="Activities">
+                    กิจกรรมและโปรเจคที่ฉันเคยเข้าร่วมและทำ
+                </PageHeader>
 
                 {/* Filter Buttons */}
                 <div className="filter-buttons animate-fade-in-up delay-2">
                     {categories.map((cat) => (
                         <button
                             key={cat.key}
+                            type="button"
                             className={`filter-btn ${activeFilter === cat.key ? 'active' : ''}`}
                             onClick={() => handleFilterClick(cat.key)}
                         >
@@ -111,14 +109,25 @@ function Activities() {
                     {filteredActivities.map((item, index) => (
                         <div
                             key={item.id}
-                            className={`activity-card animate-fade-in-up delay-${Math.min(index + 2, 6)} ${expandedId === item.id ? 'expanded' : ''}`}
+                            role="button"
+                            tabIndex={0}
+                            aria-expanded={expandedId === item.id}
+                            className={`activity-card chunky cat-${item.category} animate-fade-in-up delay-${Math.min(index + 2, 6)} ${expandedId === item.id ? 'expanded' : ''}`}
                             onClick={() => handleCardClick(item.id)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    handleCardClick(item.id);
+                                }
+                            }}
                         >
-                            <div className="activity-card-image">{item.icon}</div>
-                            <div className="activity-card-body">
+                            <div className="activity-card-image">
+                                <span className="activity-card-emoji" aria-hidden="true">{item.icon}</span>
                                 <span className="activity-card-tag">{item.tag}</span>
-                                <h3>{item.title}</h3>
+                            </div>
+                            <div className="activity-card-body">
                                 <p className="activity-card-date">{item.date}</p>
+                                <h3>{item.title}</h3>
                                 <p>{item.description}</p>
                             </div>
                             <div className="activity-card-detail">
@@ -126,6 +135,9 @@ function Activities() {
                                     {item.detail}
                                 </div>
                             </div>
+                            <span className="activity-card-toggle" aria-hidden="true">
+                                {expandedId === item.id ? 'ย่อ' : 'ดูเพิ่ม'} <span className="toggle-plus">+</span>
+                            </span>
                         </div>
                     ))}
                 </div>

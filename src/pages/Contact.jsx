@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import PageHeader from '../components/PageHeader';
 import './Contact.css';
+
+const EMAIL = 's6603051624130@email.kmutnb.ac.th';
 
 function Contact() {
     // สไลด์ 07 & 11 - useState สำหรับ controlled form
@@ -10,6 +13,7 @@ function Contact() {
         message: '',
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     // สไลด์ 06 - Event Handling
     const handleChange = (e) => {
@@ -33,64 +37,69 @@ function Contact() {
         }, 3000);
     };
 
+    const handleCopyEmail = async () => {
+        try {
+            await navigator.clipboard.writeText(EMAIL);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1800);
+        } catch {
+            window.location.href = `mailto:${EMAIL}`;
+        }
+    };
+
     return (
         <div className="contact-page">
             <div className="container section">
-                <div className="contact-header">
-                    <span className="section-label animate-fade-in-up">ติดต่อ</span>
-                    <h2 className="section-title animate-fade-in-up delay-1" style={{ textAlign: 'center' }}>
-                        Contact
-                    </h2>
-                    <p className="animate-fade-in-up delay-2">
-                        สนใจติดต่อหรือสอบถามข้อมูลเพิ่มเติม<br /> 
-                        สามารถติดต่อได้ผ่านช่องทางด้านล่าง
-                    </p>
-                </div>
+                <PageHeader emoji="💌" label="ติดต่อ" title="Contact">
+                    สนใจติดต่อหรือสอบถามข้อมูลเพิ่มเติม<br />
+                    สามารถติดต่อได้ผ่านช่องทางด้านล่าง
+                </PageHeader>
 
                 <div className="contact-grid">
                     {/* Contact Info */}
                     <div className="contact-info">
-                        <div className="contact-item animate-fade-in-up delay-2">
-                            <div className="contact-item-icon">📧</div>
+                        <div className="contact-item chunky animate-fade-in-up delay-2">
+                            <div className="contact-item-icon" aria-hidden="true">📧</div>
                             <div className="contact-item-text">
                                 <h3>Email</h3>
                                 <p>
-                                    <a href="mailto:s6603051624130@email.kmutnb.ac.th">s6603051624130@email.kmutnb.ac.th</a>
+                                    <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
                                 </p>
                             </div>
+                            <button type="button" className="copy-btn" onClick={handleCopyEmail}>
+                                {copied ? 'คัดลอกแล้ว!' : 'คัดลอก'}
+                            </button>
                         </div>
 
-                        <div className="contact-item animate-fade-in-up delay-3">
-                            <div className="contact-item-icon">📱</div>
+                        <div className="contact-item chunky animate-fade-in-up delay-3">
+                            <div className="contact-item-icon" aria-hidden="true">📱</div>
                             <div className="contact-item-text">
                                 <h3>โทรศัพท์</h3>
                                 <p>
-                                    <a href="tel:+66123456789">062-194-5791</a>
+                                    <a href="tel:+66621945791">062-194-5791</a>
                                 </p>
                             </div>
                         </div>
 
-                        <div className="contact-item animate-fade-in-up delay-4">
-                            <div className="contact-item-icon">📍</div>
+                        <div className="contact-item chunky animate-fade-in-up delay-4">
+                            <div className="contact-item-icon" aria-hidden="true">📍</div>
                             <div className="contact-item-text">
                                 <h3>ที่อยู่</h3>
                                 <p>28/10 หมู่ 1 ต.บางใหญ่ อ.บางใหญ่ จ.นนทบุรี 11140</p>
                             </div>
                         </div>
 
-                        <div className="contact-item animate-fade-in-up delay-5">
-                            <div className="contact-item-icon">🔗</div>
+                        <div className="contact-item chunky animate-fade-in-up delay-5">
+                            <div className="contact-item-icon" aria-hidden="true">🔗</div>
                             <div className="contact-item-text">
                                 <h3>Social Media</h3>
-                                <p>
+                                <p className="social-links">
                                     <a href="https://github.com" target="_blank" rel="noopener noreferrer">
                                         GitHub
                                     </a>
-                                    {' • '}
                                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                                         Facebook
                                     </a>
-                                    {' • '}
                                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                                         Instagram
                                     </a>
@@ -100,40 +109,43 @@ function Contact() {
                     </div>
 
                     {/* Contact Form — สไลด์ 11 - Controlled Components */}
-                    <div className="contact-form-wrapper animate-fade-in-up delay-3">
-                        <h3>ส่งข้อความถึงฉัน</h3>
+                    <div className="contact-form-wrapper chunky animate-fade-in-up delay-3">
+                        <span className="form-sticker" aria-hidden="true">Say hi!</span>
+                        <h3>ส่งข้อความถึงฉัน ✍️</h3>
 
                         {isSubmitted ? (
-                            <div className="form-success animate-fade-in">
-                                <div className="success-icon">✅</div>
+                            <div className="form-success">
+                                <div className="success-icon" aria-hidden="true">🎉</div>
                                 <p>ส่งข้อความสำเร็จ! ขอบคุณที่ติดต่อมา</p>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label htmlFor="contact-name">ชื่อ</label>
-                                    <input
-                                        id="contact-name"
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        placeholder="กรอกชื่อของคุณ"
-                                        required
-                                    />
-                                </div>
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label htmlFor="contact-name">ชื่อ</label>
+                                        <input
+                                            id="contact-name"
+                                            type="text"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            placeholder="กรอกชื่อของคุณ"
+                                            required
+                                        />
+                                    </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="contact-email">อีเมล</label>
-                                    <input
-                                        id="contact-email"
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        placeholder="example@email.com"
-                                        required
-                                    />
+                                    <div className="form-group">
+                                        <label htmlFor="contact-email">อีเมล</label>
+                                        <input
+                                            id="contact-email"
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            placeholder="example@email.com"
+                                            required
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="form-group">
@@ -161,8 +173,8 @@ function Contact() {
                                     ></textarea>
                                 </div>
 
-                                <button type="submit" className="form-submit">
-                                    ส่งข้อความ
+                                <button type="submit" className="btn btn-primary form-submit">
+                                    ส่งข้อความ <span className="send-icon" aria-hidden="true">✈</span>
                                 </button>
                             </form>
                         )}

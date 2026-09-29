@@ -18,6 +18,7 @@ function Navbar() {
       <div className="container navbar-inner">
         <NavLink to="/" className="navbar-logo" onClick={closeMenu}>
           Port<span>folio</span>
+          <span className="logo-star" aria-hidden="true">✦</span>
         </NavLink>
 
         <button

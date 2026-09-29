@@ -1,12 +1,16 @@
+import PageHeader from '../components/PageHeader';
 import './Education.css';
 
 // สไลด์ 05 - Component: แยก TimelineItem เป็น Component ย่อย รับ props
-function TimelineItem({ year, title, institution, description, delay }) {
+function TimelineItem({ year, title, institution, description, icon, current, delay }) {
     return (
         <div className={`timeline-item animate-fade-in-up delay-${delay}`}>
-            <div className="timeline-dot"></div>
-            <span className="timeline-year">{year}</span>
-            <div className="timeline-card">
+            <div className="timeline-dot" aria-hidden="true">{icon}</div>
+            <div className="timeline-card chunky">
+                <div className="timeline-meta">
+                    <span className="timeline-year">{year}</span>
+                    {current && <span className="timeline-now">กำลังเรียน</span>}
+                </div>
                 <h3>{title}</h3>
                 <p className="institution">{institution}</p>
                 <p>{description}</p>
@@ -22,18 +26,22 @@ const educationData = [
         title: 'ปริญญาตรี สาขาเทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์แขนงคอมพิวเตอร์',
         institution: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ',
         description: 'กำลังศึกษาในระดับปริญญาตรี เรียนรู้เกี่ยวกับการพัฒนาซอฟต์แวร์ เว็บแอปพลิเคชัน และเทคโนโลยีสมัยใหม่',
+        icon: '🎓',
+        current: true,
     },
     {
         year: '2563 — 2565',
         title: 'ประกาศนียบัตรวิชาชีพ (ปวช.) ',
         institution: 'มหาวิทยาลัยเทคโนโลยีราชมงคลพระนคร วิทยาเขตพระนครเหนือ',
         description: 'สำเร็จการศึกษาระดับประกาศนียบัตรวิชาชีพ (ปวช.) สาขาช่างไฟฟ้ากำลัง',
+        icon: '⚡',
     },
     {
         year: '2560 — 2562',
         title: 'มัธยมศึกษาตอนต้น',
         institution: 'โรงเรียนเทพศิรินทร์ นนทบุรี',
         description: 'สำเร็จการศึกษาระดับมัธยมศึกษาตอนต้น แผนการเรียน mep',
+        icon: '📘',
     },
 ];
 
@@ -41,13 +49,9 @@ function Education() {
     return (
         <div className="education-page">
             <div className="container section">
-                <div className="education-header">
-                    <span className="section-label animate-fade-in-up">การศึกษา</span>
-                    <h2 className="section-title animate-fade-in-up delay-1" style={{ textAlign: 'center' }}>
-                        Education
-                    </h2>
-                    <p className="animate-fade-in-up delay-2">ประวัติการศึกษาของฉัน ตั้งแต่อดีตจนถึงปัจจุบัน</p>
-                </div>
+                <PageHeader emoji="🎒" label="การศึกษา" title="Education">
+                    ประวัติการศึกษาของฉัน ตั้งแต่อดีตจนถึงปัจจุบัน
+                </PageHeader>
 
                 <div className="timeline">
                     {educationData.map((item, index) => (
@@ -57,6 +61,8 @@ function Education() {
                             title={item.title}
                             institution={item.institution}
                             description={item.description}
+                            icon={item.icon}
+                            current={item.current}
                             delay={index + 2}
                         />
                     ))}

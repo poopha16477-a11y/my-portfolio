@@ -1,8 +1,5 @@
 /* ===== Home Page (playful) ===== */
 .home {
-    --gold: #DAA520;
-    --gold-soft: rgba(218, 165, 32, 0.18);
-    --pop: cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow-x: clip;
 }
 
@@ -30,92 +27,41 @@
     pointer-events: none;
 }
 
-.doodle {
-    position: absolute;
-    display: block;
-    animation: float 7s ease-in-out infinite;
-}
-
-.doodle-circle {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background: var(--gold-soft);
+.hero-doodles .doodle-circle {
     top: 12%;
     left: 4%;
 }
 
-.doodle-ring {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 3px dashed var(--accent);
-    opacity: 0.25;
+.hero-doodles .doodle-ring {
     bottom: 14%;
     left: 42%;
-    animation: spin 18s linear infinite;
 }
 
-.doodle-star {
-    color: var(--gold);
-    font-size: 2rem;
+.hero-doodles .doodle-star {
     top: 18%;
     right: 8%;
-    animation: twinkle 3s ease-in-out infinite;
 }
 
-.doodle-star.small {
-    font-size: 1.2rem;
+.hero-doodles .doodle-star.small {
     top: auto;
     right: auto;
     bottom: 22%;
     left: 8%;
-    animation-delay: 1.2s;
 }
 
-.doodle-squiggle {
-    width: 110px;
-    color: var(--accent);
-    opacity: 0.18;
+.hero-doodles .doodle-squiggle {
     top: 8%;
     left: 38%;
-    animation-delay: -2s;
 }
 
-.doodle-dots {
-    width: 80px;
-    height: 80px;
+.hero-doodles .doodle-dots {
     right: 3%;
     bottom: 10%;
-    background-image: radial-gradient(var(--accent) 2px, transparent 2.5px);
-    background-size: 16px 16px;
-    opacity: 0.2;
-    animation-delay: -4s;
 }
 
 /* ----- Text ----- */
-.hero-greeting {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--accent);
-    background: var(--bg-card);
-    border: 1.5px solid var(--text-primary);
-    border-radius: 999px;
-    padding: 6px 16px 6px 10px;
+.hero-text .pill-label {
     margin-bottom: var(--space-md);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    box-shadow: 3px 3px 0 var(--text-primary);
-}
-
-.wave {
-    display: inline-block;
-    font-size: 1.2rem;
-    transform-origin: 70% 70%;
-    animation: wave 2.4s ease-in-out infinite;
 }
 
 .hero-name {
@@ -123,21 +69,6 @@
     font-weight: 700;
     line-height: 1.25;
     margin-bottom: var(--space-xs);
-}
-
-.bouncy {
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.bouncy-char {
-    display: inline-block;
-    transition: transform 0.35s var(--pop), color 0.2s;
-}
-
-.bouncy-char:hover {
-    transform: translateY(-14px) rotate(-8deg) scale(1.15);
-    color: var(--gold);
 }
 
 .hero-name .highlight .bouncy-char {
@@ -232,38 +163,6 @@
     gap: var(--space-sm);
 }
 
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 30px;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: 2px solid var(--text-primary);
-    box-shadow: 4px 4px 0 var(--text-primary);
-    transition: transform 0.2s var(--pop), box-shadow 0.2s var(--pop), background 0.2s, color 0.2s;
-}
-
-.btn:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--text-primary);
-}
-
-.btn:active {
-    transform: translate(4px, 4px);
-    box-shadow: 0 0 0 var(--text-primary);
-}
-
-.btn-primary {
-    background: var(--gold);
-    color: var(--text-primary);
-}
-
-.btn-primary:hover {
-    color: var(--text-primary);
-}
-
 .btn-arrow {
     display: inline-block;
     transition: transform 0.3s var(--pop);
@@ -271,16 +170,6 @@
 
 .btn-primary:hover .btn-arrow {
     transform: translateX(5px);
-}
-
-.btn-outline {
-    background: var(--bg-card);
-    color: var(--text-primary);
-}
-
-.btn-outline:hover {
-    color: var(--text-primary);
-    background: var(--bg-secondary);
 }
 
 /* ----- Photo ----- */
@@ -580,31 +469,6 @@
 }
 
 /* ===== Keyframes ===== */
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-18px) rotate(6deg); }
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes twinkle {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-    50% { transform: scale(0.6) rotate(45deg); opacity: 0.5; }
-}
-
-@keyframes wave {
-    0%, 60%, 100% { transform: rotate(0deg); }
-    10%, 30% { transform: rotate(16deg); }
-    20%, 40% { transform: rotate(-10deg); }
-}
-
-@keyframes underline-grow {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
-}
-
 @keyframes blink {
     50% { opacity: 0; }
 }
@@ -615,38 +479,12 @@
     66% { border-radius: 36% 64% 52% 48% / 38% 60% 40% 62%; transform: rotate(-5deg); }
 }
 
-@keyframes pop-in {
-    from { transform: scale(0.3) rotate(-12deg); opacity: 0; }
-    to { transform: scale(1) rotate(-3deg); opacity: 1; }
-}
-
-@keyframes bob {
-    0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
-    50% { transform: translateY(-8px) rotate(var(--tilt, 0deg)); }
-}
-
 @keyframes marquee {
     to { transform: translateX(-50%); }
 }
 
-@keyframes wiggle {
-    0%, 100% { transform: rotate(0deg); }
-    20% { transform: rotate(-4deg) scale(1.02); }
-    40% { transform: rotate(3deg); }
-    60% { transform: rotate(-2deg); }
-    80% { transform: rotate(1deg); }
-}
-
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
-    .home *,
-    .home *::before,
-    .home *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-
     .hero-tilt {
         transform: none;
     }

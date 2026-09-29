@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Not part of the website
+slide/
+pic/
+.claude/
+skills-lock.json

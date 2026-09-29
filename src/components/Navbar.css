@@ -6,7 +6,7 @@
     background: rgba(250, 250, 248, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 2px solid var(--text-primary);
     transition: all var(--transition);
 }
 
@@ -23,46 +23,59 @@
     font-weight: 700;
     color: var(--text-primary);
     letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .navbar-logo span {
-    color: var(--accent);
+    color: var(--gold);
+    font-style: italic;
+}
+
+.navbar-logo .logo-star {
+    display: inline-block;
+    font-style: normal;
+    font-size: 0.9rem;
+    margin-left: 4px;
+    transition: transform 0.6s var(--pop);
+}
+
+.navbar-logo:hover .logo-star {
+    transform: rotate(180deg) scale(1.4);
 }
 
 .navbar-links {
     display: flex;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-xs);
 }
 
 .navbar-links a {
     font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    position: relative;
-    padding: var(--space-xs) 0;
-    transition: color var(--transition);
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    transition: transform 0.25s var(--pop), background 0.2s, border-color 0.2s, box-shadow 0.25s var(--pop);
 }
 
-.navbar-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width var(--transition);
+.navbar-links a:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    transform: rotate(-3deg);
 }
 
-.navbar-links a:hover,
 .navbar-links a.active {
     color: var(--text-primary);
+    background: var(--gold);
+    border-color: var(--text-primary);
+    box-shadow: 3px 3px 0 var(--text-primary);
 }
 
-.navbar-links a.active::after,
-.navbar-links a:hover::after {
-    width: 100%;
+.navbar-links a:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
 }
 
 /* Mobile Menu Button */
@@ -109,7 +122,7 @@
         flex-direction: column;
         padding: var(--space-lg);
         gap: var(--space-md);
-        border-bottom: 1px solid var(--border);
+        border-bottom: 2px solid var(--text-primary);
         transform: translateY(-120%);
         opacity: 0;
         transition: all var(--transition);
@@ -122,5 +135,6 @@
 
     .navbar-links a {
         font-size: 1.1rem;
+        padding: 8px 24px;
     }
 }
