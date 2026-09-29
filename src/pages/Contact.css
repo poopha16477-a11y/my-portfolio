@@ -220,6 +220,28 @@
     color: var(--text-primary);
 }
 
+.form-success p {
+    margin-bottom: var(--space-md);
+}
+
+.form-error {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #B42318;
+    background: #FEF3F2;
+    border: 1.5px solid #B42318;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    margin-bottom: var(--space-sm);
+    overflow-wrap: anywhere;
+}
+
+.form-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+}
+
 .form-success .success-icon {
     display: inline-block;
     font-size: 3.5rem;

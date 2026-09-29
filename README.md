@@ -1,16 +1,39 @@
-# React + Vite
+# ภูผา สนานคุณ — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+เว็บไซต์ Portfolio ส่วนตัว แสดงข้อมูลส่วนตัว ประวัติการศึกษา กิจกรรม/ผลงาน และช่องทางติดต่อ
 
-Currently, two official plugins are available:
+**Live:** https://projectreact-six.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
 
-## React Compiler
+- React 19 + React Router 7
+- Vite 8
+- CSS ล้วน (ไม่ใช้ UI library)
+- Deploy บน Vercel (auto-deploy เมื่อ push เข้า `main`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## เริ่มต้นใช้งาน
 
-## Expanding the Oxlint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+คำสั่งอื่นๆ: `npm run build`, `npm run preview`, `npm run lint`
+
+## ตั้งค่าฟอร์มติดต่อ (ไม่บังคับ)
+
+ฟอร์มหน้า Contact จะส่งข้อความผ่าน [Formspree](https://formspree.io) ถ้าตั้งค่า `VITE_FORMSPREE_ID`
+(ดู `.env.example`) ถ้าไม่ได้ตั้งค่า ฟอร์มจะเปิดแอปอีเมลพร้อมข้อความที่กรอกไว้แทน
+
+## โครงสร้าง
+
+```
+src/
+  components/   Navbar, Footer, Layout, PageHeader, BouncyText
+  pages/        Home, Education, Activities, Contact
+  utils/        ฟังก์ชันช่วย (ตัดคำภาษาไทย)
+  index.css     design tokens และสไตล์ที่ใช้ร่วมกัน
+```
+
+ข้อมูลที่แก้บ่อย เช่น รายการทักษะ (`SKILLS` ใน `Home.jsx`), ประวัติการศึกษา (`Education.jsx`)
+และกิจกรรม (`Activities.jsx`) อยู่เป็น array ด้านบนของแต่ละไฟล์

@@ -14,11 +14,8 @@ function Footer() {
                     © {currentYear} <span>Portfolio</span>. Made with <span className="heart" aria-label="love">♥</span> &amp; React
                 </p>
                 <div className="footer-links">
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/poopha16477-a11y" target="_blank" rel="noopener noreferrer">
                         GitHub
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                        LinkedIn
                     </a>
                     <button type="button" className="footer-top" onClick={scrollToTop}>
                         ขึ้นด้านบน ↑

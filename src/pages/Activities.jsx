@@ -53,6 +53,10 @@ const activitiesData = [
         tag: 'Project',
         description: 'ออกแบบและพัฒนาเว็บไซต์ Portfolio ส่วนตัวด้วย React + Vite',
         detail: 'ใช้ความรู้ที่เรียนมาทั้งหมด: Components, State, Effects, Routing, Forms มาสร้างเว็บไซต์นี้',
+        links: [
+            { label: 'Source code', href: 'https://github.com/poopha16477-a11y/my-portfolio' },
+            { label: 'Live site', href: 'https://projectreact-six.vercel.app' },
+        ],
     },
 ];
 
@@ -133,6 +137,22 @@ function Activities() {
                             <div className="activity-card-detail">
                                 <div className="activity-card-detail-inner">
                                     {item.detail}
+                                    {item.links && (
+                                        <span className="activity-card-links">
+                                            {item.links.map((link) => (
+                                                <a
+                                                    key={link.href}
+                                                    href={link.href}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    tabIndex={expandedId === item.id ? 0 : -1}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    {link.label} ↗
+                                                </a>
+                                            ))}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <span className="activity-card-toggle" aria-hidden="true">

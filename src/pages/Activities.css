@@ -228,3 +228,28 @@
         grid-template-columns: 1fr;
     }
 }
+
+.activity-card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: var(--space-xs);
+}
+
+.activity-card-links a {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1.5px solid var(--text-primary);
+    box-shadow: 2px 2px 0 var(--text-primary);
+    transition: transform 0.2s var(--pop), background 0.2s;
+}
+
+.activity-card-links a:hover {
+    color: var(--text-primary);
+    background: var(--gold);
+    transform: rotate(-3deg);
+}

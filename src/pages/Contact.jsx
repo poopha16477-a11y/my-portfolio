@@ -3,16 +3,18 @@ import PageHeader from '../components/PageHeader';
 import './Contact.css';
 
 const EMAIL = 's6603051624130@email.kmutnb.ac.th';
+const GITHUB_URL = 'https://github.com/poopha16477-a11y';
+
+// ใส่ Form ID จาก formspree.io ใน .env เป็น VITE_FORMSPREE_ID เพื่อให้ฟอร์มส่งข้อความจริง
+// ถ้ายังไม่ได้ตั้งค่า ฟอร์มจะเปิดแอปอีเมลพร้อมข้อความที่กรอกไว้แทน
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+const EMPTY_FORM = { name: '', email: '', subject: '', message: '' };
 
 function Contact() {
     // สไลด์ 07 & 11 - useState สำหรับ controlled form
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-    });
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [formData, setFormData] = useState(EMPTY_FORM);
+    // idle | sending | sent | mailto | error
+    const [status, setStatus] = useState('idle');
     const [copied, setCopied] = useState(false);
 
     // สไลด์ 06 - Event Handling
@@ -25,16 +27,32 @@ function Contact() {
     };
 
     // สไลด์ 06 & 11 - Form Submit Handler
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        setIsSubmitted(true);
 
-        // Reset form after 3 seconds
-        setTimeout(() => {
-            setIsSubmitted(false);
-            setFormData({ name: '', email: '', subject: '', message: '' });
-        }, 3000);
+        if (!FORMSPREE_ID) {
+            const body = `${formData.message}
+
+— ${formData.name} (${formData.email})`;
+            window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(body)}`;
+            setStatus('mailto');
+            return;
+        }
+
+        setStatus('sending');
+        try {
+            const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+            setStatus('sent');
+            setFormData(EMPTY_FORM);
+        } catch (err) {
+            console.error(err);
+            setStatus('error');
+        }
     };
 
     const handleCopyEmail = async () => {
@@ -85,23 +103,17 @@ function Contact() {
                             <div className="contact-item-icon" aria-hidden="true">📍</div>
                             <div className="contact-item-text">
                                 <h3>ที่อยู่</h3>
-                                <p>28/10 หมู่ 1 ต.บางใหญ่ อ.บางใหญ่ จ.นนทบุรี 11140</p>
+                                <p>อ.บางใหญ่ จ.นนทบุรี</p>
                             </div>
                         </div>
 
                         <div className="contact-item chunky animate-fade-in-up delay-5">
                             <div className="contact-item-icon" aria-hidden="true">🔗</div>
                             <div className="contact-item-text">
-                                <h3>Social Media</h3>
+                                <h3>GitHub</h3>
                                 <p className="social-links">
-                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                                        GitHub
-                                    </a>
-                                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                                        Facebook
-                                    </a>
-                                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                                        Instagram
+                                    <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                                        github.com/poopha16477-a11y
                                     </a>
                                 </p>
                             </div>
@@ -113,10 +125,17 @@ function Contact() {
                         <span className="form-sticker" aria-hidden="true">Say hi!</span>
                         <h3>ส่งข้อความถึงฉัน ✍️</h3>
 
-                        {isSubmitted ? (
-                            <div className="form-success">
-                                <div className="success-icon" aria-hidden="true">🎉</div>
-                                <p>ส่งข้อความสำเร็จ! ขอบคุณที่ติดต่อมา</p>
+                        {status === 'sent' || status === 'mailto' ? (
+                            <div className="form-success" role="status">
+                                <div className="success-icon" aria-hidden="true">{status === 'sent' ? '🎉' : '📨'}</div>
+                                <p>
+                                    {status === 'sent'
+                                        ? 'ส่งข้อความสำเร็จ! ขอบคุณที่ติดต่อมา'
+                                        : 'เปิดแอปอีเมลพร้อมข้อความให้แล้ว กดส่งในแอปอีเมลได้เลย'}
+                                </p>
+                                <button type="button" className="btn btn-outline" onClick={() => setStatus('idle')}>
+                                    เขียนข้อความใหม่
+                                </button>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit}>
@@ -173,8 +192,15 @@ function Contact() {
                                     ></textarea>
                                 </div>
 
-                                <button type="submit" className="btn btn-primary form-submit">
-                                    ส่งข้อความ <span className="send-icon" aria-hidden="true">✈</span>
+                                {status === 'error' && (
+                                    <p className="form-error" role="alert">
+                                        ส่งไม่สำเร็จ ลองใหม่อีกครั้ง หรืออีเมลมาที่ {EMAIL}
+                                    </p>
+                                )}
+
+                                <button type="submit" className="btn btn-primary form-submit" disabled={status === 'sending'}>
+                                    {status === 'sending' ? 'กำลังส่ง...' : 'ส่งข้อความ'}{' '}
+                                    <span className="send-icon" aria-hidden="true">✈</span>
                                 </button>
                             </form>
                         )}
