@@ -33,16 +33,16 @@ function Navbar() {
 
         <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
           <NavLink to="/" end onClick={closeMenu}>
-            หน้าแรก
+            Home
           </NavLink>
           <NavLink to="/education" onClick={closeMenu}>
-            การศึกษา
+            Education
           </NavLink>
           <NavLink to="/activities" onClick={closeMenu}>
-            กิจกรรม
+            Activities
           </NavLink>
           <NavLink to="/contact" onClick={closeMenu}>
-            ติดต่อ
+            Contact
           </NavLink>
         </div>
       </div>

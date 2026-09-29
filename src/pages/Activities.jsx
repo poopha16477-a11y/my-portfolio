@@ -62,11 +62,11 @@ const activitiesData = [
 ];
 
 const categories = [
-    { key: 'all', label: 'ทั้งหมด' },
-    { key: 'project', label: 'โปรเจค' },
-    { key: 'training', label: 'อบรม' },
-    { key: 'volunteer', label: 'อาสา' },
-    { key: 'competition', label: 'แข่งขัน' },
+    { key: 'all', label: 'All' },
+    { key: 'project', label: 'Projects' },
+    { key: 'training', label: 'Training' },
+    { key: 'volunteer', label: 'Volunteer' },
+    { key: 'competition', label: 'Competition' },
 ];
 
 function Activities() {
@@ -158,7 +158,7 @@ function Activities() {
                                 </div>
                             </div>
                             <span className="activity-card-toggle" aria-hidden="true">
-                                {expandedId === item.id ? 'ย่อ' : 'ดูเพิ่ม'} <span className="toggle-plus">+</span>
+                                {expandedId === item.id ? 'Show less' : 'Read more'} <span className="toggle-plus">+</span>
                             </span>
                         </Reveal>
                     ))}
