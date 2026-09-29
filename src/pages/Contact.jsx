@@ -1,13 +1,18 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import PageHeader from '../components/PageHeader';
 import './Contact.css';
 
-const EMAIL = 's6603051624130@email.kmutnb.ac.th';
+const EMAIL = 'Poopha16477@gmail.com';
 const GITHUB_URL = 'https://github.com/poopha16477-a11y';
 
-// ใส่ Form ID จาก formspree.io ใน .env เป็น VITE_FORMSPREE_ID เพื่อให้ฟอร์มส่งข้อความจริง
-// ถ้ายังไม่ได้ตั้งค่า ฟอร์มจะเปิดแอปอีเมลพร้อมข้อความที่กรอกไว้แทน
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+// ค่าจาก EmailJS (ดู .env.example) ถ้ายังไม่ได้ตั้งค่า ฟอร์มจะเปิดแอปอีเมลพร้อมข้อความที่กรอกไว้แทน
+const EMAILJS = {
+    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+};
+const EMAILJS_READY = Boolean(EMAILJS.serviceId && EMAILJS.templateId && EMAILJS.publicKey);
 const EMPTY_FORM = { name: '', email: '', subject: '', message: '' };
 
 function Contact() {
@@ -30,7 +35,7 @@ function Contact() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!FORMSPREE_ID) {
+        if (!EMAILJS_READY) {
             const body = `${formData.message}
 
 — ${formData.name} (${formData.email})`;
@@ -41,16 +46,22 @@ function Contact() {
 
         setStatus('sending');
         try {
-            const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify(formData),
-            });
-            if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+            // ชื่อตัวแปรเหล่านี้ต้องตรงกับที่ใช้ใน EmailJS template: {{name}} {{email}} {{subject}} {{message}}
+            await emailjs.send(
+                EMAILJS.serviceId,
+                EMAILJS.templateId,
+                {
+                    name: formData.name,
+                    email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message,
+                },
+                { publicKey: EMAILJS.publicKey },
+            );
             setStatus('sent');
             setFormData(EMPTY_FORM);
         } catch (err) {
-            console.error(err);
+            console.error('EmailJS error:', err);
             setStatus('error');
         }
     };
