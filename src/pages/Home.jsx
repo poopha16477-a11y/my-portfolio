@@ -14,8 +14,14 @@ const ROLES = [
 
 const GREETINGS = ['สวัสดีครับ!', 'Hello!', 'ยินดีที่ได้รู้จัก', 'กดอีกทีสิ :)'];
 
-// ใช้ทั้งในแถบเลื่อนและการ์ดทักษะ แก้ที่นี่ที่เดียว
-const SKILLS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'Java', 'C++', 'Dart', 'Firebase', 'SQL', 'Microcontroller'];
+// ทักษะแบ่งตามหมวด ใช้ทั้งในการ์ด Skills และแถบเลื่อน แก้ที่นี่ที่เดียว
+const SKILL_GROUPS = [
+    { label: 'Web', items: ['HTML', 'CSS', 'JavaScript', 'React'] },
+    { label: 'Programming', items: ['Python', 'Java', 'C++', 'Dart'] },
+    { label: 'Data', items: ['Firebase', 'SQL'] },
+    { label: 'Hardware', items: ['Microcontroller'] },
+];
+const SKILLS = SKILL_GROUPS.flatMap((group) => group.items);
 
 // แถบเลื่อนแถวที่สอง (วิ่งสวนทาง)
 const INTERESTS = ['Web Development', 'Electronics', 'Hardware', 'Microcontroller', 'UI ที่เล่นได้', 'Always Learning'];
@@ -113,7 +119,6 @@ function Home() {
     const role = useTypewriter(ROLES);
     const [greetIndex, setGreetIndex] = useState(0);
     const [popKey, setPopKey] = useState(0);
-    const [wiggling, setWiggling] = useState(null);
 
     // เอียงรูปตามเมาส์ ด้วย CSS variables (ไม่ใช้ state เพื่อไม่ให้ re-render ทุกครั้งที่เมาส์ขยับ)
     const handlePointerMove = (e) => {
@@ -157,10 +162,10 @@ function Home() {
                             <span className="pill-emoji" aria-hidden="true">👋</span> Welcome to my Portfolio
                         </p>
                         <h1 className="hero-name animate-fade-in-up delay-2">
-                            <BouncyText text="ภูผา" />{' '}
-                            <BouncyText text="สนานคุณ" className="highlight" />
+                            <BouncyText text="Poopha" />{' '}
+                            <BouncyText text="Sanankhun" className="highlight" />
                         </h1>
-                        <p className="hero-en animate-fade-in-up delay-3">Poopha Sanankhun</p>
+                        <p className="hero-en animate-fade-in-up delay-3">ภูผา สนานคุณ</p>
 
                         <p className="hero-typer animate-fade-in-up delay-3" aria-live="polite">
                             <span className="typer-prefix">ผมคือ</span>
@@ -230,48 +235,48 @@ function Home() {
                     <Reveal as="h2" className="section-title" delay={80}>About Me</Reveal>
 
                     <div className="about-grid">
-                        {[
-                            {
-                                icon: '🎓',
-                                title: 'การศึกษา',
-                                body: 'กำลังศึกษาอยู่ในระดับปริญญาตรี สาขา เทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์ มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ',
-                                className: 'card-edu',
-                                tags: ['ปริญญาตรี', 'อิเล็กทรอนิกส์', 'คอมพิวเตอร์', 'มจพ.'],
-                            },
-                            {
-                                icon: '💻',
-                                title: 'ทักษะ',
-                                body: `มีความรู้ด้าน ${SKILLS.join(', ')}`,
-                                className: 'card-skill',
-                            },
-                            {
-                                icon: '🎯',
-                                title: 'เป้าหมาย',
-                                body: 'ต้องการพัฒนาทักษะด้านการเขียนโปรแกรมและสร้างผลงานที่มีคุณค่า',
-                                className: 'card-goal',
-                            },
-                        ].map((card, i) => (
-                            <Reveal
-                                as="button"
-                                type="button"
-                                delay={150 + i * 120}
-                                key={card.title}
-                                className={`about-card ${card.className} ${wiggling === card.title ? 'wiggle' : ''}`}
-                                onClick={() => setWiggling(card.title)}
-                                onAnimationEnd={(e) => e.animationName === 'wiggle' && setWiggling(null)}
-                            >
-                                <span className="about-card-icon" aria-hidden="true">{card.icon}</span>
-                                <h3>{card.title}</h3>
-                                <p>{card.body}</p>
-                                {card.tags && (
-                                    <span className="card-tags">
-                                        {card.tags.map((tag) => (
-                                            <span key={tag}>{tag}</span>
-                                        ))}
-                                    </span>
-                                )}
-                            </Reveal>
-                        ))}
+                        <Reveal className="about-card card-edu" delay={150}>
+                            <div className="about-card-head">
+                                <span className="about-card-icon" aria-hidden="true">🎓</span>
+                                <h3>Education</h3>
+                            </div>
+                            <p>
+                                กำลังศึกษาอยู่ในระดับปริญญาตรี สาขา เทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์
+                                มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ
+                            </p>
+                            <ul className="chip-list card-foot">
+                                {['ปริญญาตรี', 'อิเล็กทรอนิกส์', 'คอมพิวเตอร์', 'มจพ.'].map((tag, i) => (
+                                    <li key={tag} className={`chip ${i === 1 ? 'chip-hot' : ''}`}>{tag}</li>
+                                ))}
+                            </ul>
+                        </Reveal>
+
+                        <Reveal className="about-card card-goal" delay={270}>
+                            <div className="about-card-head">
+                                <span className="about-card-icon" aria-hidden="true">🎯</span>
+                                <h3>Goals</h3>
+                            </div>
+                            <p>ต้องการพัฒนาทักษะด้านการเขียนโปรแกรมและสร้างผลงานที่มีคุณค่า</p>
+                        </Reveal>
+
+                        <Reveal className="about-card card-skill" delay={390}>
+                            <div className="about-card-head">
+                                <span className="about-card-icon" aria-hidden="true">💻</span>
+                                <h3>Skills</h3>
+                            </div>
+                            <div className="skill-groups">
+                                {SKILL_GROUPS.map((group) => (
+                                    <div key={group.label} className="skill-group">
+                                        <span className="skill-group-label">{group.label}</span>
+                                        <ul className="chip-list">
+                                            {group.items.map((skill) => (
+                                                <li key={skill} className="chip">{skill}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </Reveal>
                     </div>
                 </div>
             </section>
@@ -309,8 +314,8 @@ function Home() {
                                     </span>
                                 </div>
                                 <ul className="hobby-chips">
-                                    {group.items.map((item, j) => (
-                                        <li key={item.label} className="hobby-chip" style={{ '--tilt': `${j % 2 ? 2 : -2}deg` }}>
+                                    {group.items.map((item) => (
+                                        <li key={item.label} className="hobby-chip">
                                             <span className="hobby-chip-emoji" aria-hidden="true">{item.emoji}</span>
                                             {item.label}
                                         </li>

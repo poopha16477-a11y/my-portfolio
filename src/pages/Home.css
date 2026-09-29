@@ -378,8 +378,7 @@
 
 .about-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1.4fr 1fr;
     gap: var(--space-md);
     margin-top: var(--space-lg);
 }
@@ -387,10 +386,6 @@
 .about-card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-    color: inherit;
     background: var(--bg-card);
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
@@ -399,76 +394,38 @@
     transition: transform 0.3s var(--pop), box-shadow 0.3s var(--pop);
 }
 
-.card-edu {
-    grid-row: span 2;
-    transform: rotate(-1deg);
-}
-
-.card-skill {
-    background: var(--gold);
-    transform: rotate(1.2deg);
+.about-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--text-primary);
 }
 
 .card-goal {
     background: var(--accent);
-    transform: rotate(-0.8deg);
-}
-
-.about-card.card-goal h3,
-.about-card.card-goal p {
     color: var(--bg-primary);
 }
 
-.about-card.card-skill p {
-    color: var(--text-primary);
-}
-
-.card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: auto;
-    padding-top: var(--space-md);
-}
-
-.card-tags span {
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 999px;
-    border: 1.5px solid var(--text-primary);
-    background: var(--bg-secondary);
-}
-
-.card-tags span:nth-child(2) {
+.card-skill {
+    grid-column: 1 / -1;
     background: var(--gold);
-    transform: rotate(-3deg);
 }
 
-.about-card:hover {
-    transform: rotate(0deg) translate(-3px, -3px);
-    box-shadow: 8px 8px 0 var(--text-primary);
-}
-
-.about-card:focus-visible {
-    outline: 3px solid var(--gold);
-    outline-offset: 4px;
-}
-
-.about-card.wiggle {
-    animation: wiggle 0.6s ease-in-out;
+.about-card-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: var(--space-sm);
 }
 
 .about-card-icon {
-    display: inline-grid;
+    display: grid;
     place-items: center;
-    width: 56px;
-    height: 56px;
-    font-size: 1.8rem;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    font-size: 1.6rem;
     background: var(--bg-primary);
     border: 2px solid var(--text-primary);
     border-radius: 16px;
-    margin-bottom: var(--space-sm);
     transition: transform 0.4s var(--pop);
 }
 
@@ -478,23 +435,83 @@
 
 .about-card h3 {
     font-family: var(--font-body);
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: var(--space-xs);
+    color: inherit;
 }
 
 .about-card p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.75;
 }
 
-.card-edu h3 {
-    font-size: 1.5rem;
+.card-goal p {
+    color: rgba(249, 247, 243, 0.85);
 }
 
-.card-edu p {
-    font-size: 1.05rem;
+.card-foot {
+    margin-top: auto;
+    padding-top: var(--space-md);
+}
+
+/* Chips (ใช้ร่วมกันใน About) */
+.chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 4px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--text-primary);
+    background: var(--bg-secondary);
+    transition: transform 0.25s var(--pop), background 0.2s;
+}
+
+.chip:hover {
+    background: var(--gold);
+    transform: rotate(-3deg);
+}
+
+.chip-hot {
+    background: var(--gold);
+    transform: rotate(-3deg);
+}
+
+.card-skill .chip {
+    background: var(--bg-card);
+}
+
+.card-skill .chip:hover {
+    background: var(--bg-secondary);
+}
+
+.skill-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 var(--space-lg);
+}
+
+.skill-group {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 12px 0;
+    border-top: 2px dashed rgba(18, 36, 58, 0.35);
+}
+
+.skill-group-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-primary);
 }
 
 /* ----- Hobbies ----- */
@@ -534,8 +551,8 @@
 .hobbies-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-lg);
-    align-items: start;
+    gap: var(--space-md);
+    align-items: stretch;
 }
 
 .hobby-card {
@@ -543,20 +560,8 @@
     transition: transform 0.3s var(--pop), box-shadow 0.3s var(--pop);
 }
 
-.hobby-card:nth-child(1) {
-    transform: rotate(-1.5deg);
-}
-
-.hobby-card:nth-child(2) {
-    transform: rotate(1deg) translateY(24px);
-}
-
-.hobby-card:nth-child(3) {
-    transform: rotate(-0.8deg);
-}
-
 .hobby-card:hover {
-    transform: rotate(0deg) translate(-3px, -3px);
+    transform: translate(-3px, -3px);
     box-shadow: 8px 8px 0 var(--text-primary);
 }
 
@@ -643,13 +648,12 @@
     border-radius: 999px;
     padding: 6px 14px 6px 8px;
     box-shadow: 2px 2px 0 var(--text-primary);
-    transform: rotate(var(--tilt, 0deg));
     transition: transform 0.3s var(--pop), background 0.2s;
 }
 
 .hobby-chip:hover {
     background: var(--bg-secondary);
-    transform: rotate(0deg) translateY(-4px) scale(1.06);
+    transform: translateY(-4px) scale(1.06);
 }
 
 .hobby-chip-emoji {
@@ -727,9 +731,11 @@
         max-width: 520px;
         margin: 0 auto;
     }
+}
 
-    .hobby-card:nth-child(2) {
-        transform: rotate(1deg);
+@media (max-width: 900px) {
+    .skill-groups {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -738,8 +744,15 @@
         grid-template-columns: 1fr;
     }
 
-    .card-edu {
-        grid-row: auto;
+    .about-card {
+        padding: var(--space-md);
+    }
+}
+
+@media (max-width: 420px) {
+    .skill-group {
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 }
 

@@ -112,7 +112,7 @@ function Contact() {
                         <Reveal className="contact-item chunky" delay={100}>
                             <div className="contact-item-icon" aria-hidden="true">📱</div>
                             <div className="contact-item-text">
-                                <h3>โทรศัพท์</h3>
+                                <h3>Phone</h3>
                                 <p>
                                     <a href="tel:+66621945791">062-194-5791</a>
                                 </p>
@@ -122,7 +122,7 @@ function Contact() {
                         <Reveal className="contact-item chunky" delay={200}>
                             <div className="contact-item-icon" aria-hidden="true">📍</div>
                             <div className="contact-item-text">
-                                <h3>ที่อยู่</h3>
+                                <h3>Location</h3>
                                 <p>อ.บางใหญ่ จ.นนทบุรี</p>
                             </div>
                         </Reveal>
@@ -143,7 +143,7 @@ function Contact() {
                     {/* Contact Form — สไลด์ 11 - Controlled Components */}
                     <Reveal className="contact-form-wrapper chunky" delay={150}>
                         <span className="form-sticker" aria-hidden="true">Say hi!</span>
-                        <h3>ส่งข้อความถึงฉัน ✍️</h3>
+                        <h3>Send me a message ✍️</h3>
 
                         {status === 'sent' || status === 'mailto' ? (
                             <div className="form-success" role="status">
@@ -171,7 +171,7 @@ function Contact() {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label htmlFor="contact-name">ชื่อ</label>
+                                        <label htmlFor="contact-name">Name</label>
                                         <input
                                             id="contact-name"
                                             type="text"
@@ -184,7 +184,7 @@ function Contact() {
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="contact-email">อีเมล</label>
+                                        <label htmlFor="contact-email">Email</label>
                                         <input
                                             id="contact-email"
                                             type="email"
@@ -198,7 +198,7 @@ function Contact() {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="contact-subject">หัวข้อ</label>
+                                    <label htmlFor="contact-subject">Subject</label>
                                     <input
                                         id="contact-subject"
                                         type="text"
@@ -211,7 +211,7 @@ function Contact() {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="contact-message">ข้อความ</label>
+                                    <label htmlFor="contact-message">Message</label>
                                     <textarea
                                         id="contact-message"
                                         name="message"
