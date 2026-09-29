@@ -3,17 +3,17 @@
 
 /* ===== Design Tokens ===== */
 :root {
-  --bg-primary: #FAFAF8;
-  --bg-secondary: #F2F0EC;
+  --bg-primary: #F9F7F3;
+  --bg-secondary: #F0EAD6;
   --bg-card: #FFFFFF;
-  --text-primary: #1A1A1A;
-  --text-secondary: #4A4A4A;
-  --text-muted: #8C8C8C;
-  --accent: #C9A96E;
-  --accent-hover: #B8953D;
-  --accent-light: rgba(201, 169, 110, 0.1);
-  --border: #E5E3DF;
-  --border-light: #F0EDE8;
+  --text-primary: #12243A;
+  --text-secondary: #2C4362;
+  --text-muted: #6C81A0;
+  --accent: #193655;
+  --accent-hover: #0E2036;
+  --accent-light: rgba(25, 54, 85, 0.1);
+  --border: #E8E1D3;
+  --border-light: #F2EFE8;
 
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: 'Playfair Display', Georgia, serif;
@@ -61,16 +61,29 @@ body {
   background-color: var(--bg-primary);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.3;
   color: var(--text-primary);
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.2rem; }
-h3 { font-size: 1.4rem; }
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
 
 a {
   text-decoration: none;
@@ -87,7 +100,8 @@ img {
   display: block;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -98,7 +112,8 @@ button {
   font-family: inherit;
 }
 
-input, textarea {
+input,
+textarea {
   font-family: inherit;
   font-size: inherit;
 }
@@ -143,6 +158,7 @@ input, textarea {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -150,8 +166,13 @@ input, textarea {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .animate-fade-in-up {
@@ -164,18 +185,43 @@ input, textarea {
   opacity: 0;
 }
 
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
-.delay-6 { animation-delay: 0.6s; }
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+.delay-4 {
+  animation-delay: 0.4s;
+}
+
+.delay-5 {
+  animation-delay: 0.5s;
+}
+
+.delay-6 {
+  animation-delay: 0.6s;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  h1 { font-size: 2.2rem; }
-  h2 { font-size: 1.8rem; }
-  h3 { font-size: 1.2rem; }
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
 
   .section {
     padding: var(--space-xl) 0;
@@ -183,6 +229,11 @@ input, textarea {
 }
 
 @media (max-width: 480px) {
-  h1 { font-size: 1.8rem; }
-  h2 { font-size: 1.5rem; }
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }

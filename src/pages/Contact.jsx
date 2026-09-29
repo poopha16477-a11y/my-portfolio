@@ -42,7 +42,8 @@ function Contact() {
                         Contact
                     </h2>
                     <p className="animate-fade-in-up delay-2">
-                        สนใจติดต่อหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ผ่านช่องทางด้านล่าง
+                        สนใจติดต่อหรือสอบถามข้อมูลเพิ่มเติม<br /> 
+                        สามารถติดต่อได้ผ่านช่องทางด้านล่าง
                     </p>
                 </div>
 
@@ -54,7 +55,7 @@ function Contact() {
                             <div className="contact-item-text">
                                 <h3>Email</h3>
                                 <p>
-                                    <a href="mailto:example@email.com">example@email.com</a>
+                                    <a href="mailto:s6603051624130@email.kmutnb.ac.th">s6603051624130@email.kmutnb.ac.th</a>
                                 </p>
                             </div>
                         </div>
@@ -64,7 +65,7 @@ function Contact() {
                             <div className="contact-item-text">
                                 <h3>โทรศัพท์</h3>
                                 <p>
-                                    <a href="tel:+66123456789">012-345-6789</a>
+                                    <a href="tel:+66123456789">062-194-5791</a>
                                 </p>
                             </div>
                         </div>
@@ -73,7 +74,7 @@ function Contact() {
                             <div className="contact-item-icon">📍</div>
                             <div className="contact-item-text">
                                 <h3>ที่อยู่</h3>
-                                <p>กรุงเทพมหานคร, ประเทศไทย</p>
+                                <p>28/10 หมู่ 1 ต.บางใหญ่ อ.บางใหญ่ จ.นนทบุรี 11140</p>
                             </div>
                         </div>
 
