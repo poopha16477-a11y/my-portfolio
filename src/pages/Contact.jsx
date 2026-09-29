@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import PageHeader from '../components/PageHeader';
+import Reveal from '../components/Reveal';
 import './Contact.css';
 
 const EMAIL = 'Poopha16477@gmail.com';
@@ -13,6 +14,14 @@ const EMAILJS = {
     publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 };
 const EMAILJS_READY = Boolean(EMAILJS.serviceId && EMAILJS.templateId && EMAILJS.publicKey);
+// ตำแหน่งพลุกระดาษตอนส่งสำเร็จ (คำนวณครั้งเดียว ไม่สุ่มตอน render)
+const CONFETTI = Array.from({ length: 18 }, (_, i) => ({
+    x: `${Math.round(Math.cos((i / 18) * Math.PI * 2) * (90 + (i % 3) * 40))}px`,
+    y: `${Math.round(Math.sin((i / 18) * Math.PI * 2) * (70 + (i % 4) * 25) - 40)}px`,
+    r: `${(i * 67) % 360}deg`,
+    color: ['var(--gold)', 'var(--accent)', '#F2C14E', 'var(--text-muted)'][i % 4],
+}));
+
 const EMPTY_FORM = { name: '', email: '', subject: '', message: '' };
 
 function Contact() {
@@ -87,7 +96,7 @@ function Contact() {
                 <div className="contact-grid">
                     {/* Contact Info */}
                     <div className="contact-info">
-                        <div className="contact-item chunky animate-fade-in-up delay-2">
+                        <Reveal className="contact-item chunky" delay={0}>
                             <div className="contact-item-icon" aria-hidden="true">📧</div>
                             <div className="contact-item-text">
                                 <h3>Email</h3>
@@ -98,9 +107,9 @@ function Contact() {
                             <button type="button" className="copy-btn" onClick={handleCopyEmail}>
                                 {copied ? 'คัดลอกแล้ว!' : 'คัดลอก'}
                             </button>
-                        </div>
+                        </Reveal>
 
-                        <div className="contact-item chunky animate-fade-in-up delay-3">
+                        <Reveal className="contact-item chunky" delay={100}>
                             <div className="contact-item-icon" aria-hidden="true">📱</div>
                             <div className="contact-item-text">
                                 <h3>โทรศัพท์</h3>
@@ -108,17 +117,17 @@ function Contact() {
                                     <a href="tel:+66621945791">062-194-5791</a>
                                 </p>
                             </div>
-                        </div>
+                        </Reveal>
 
-                        <div className="contact-item chunky animate-fade-in-up delay-4">
+                        <Reveal className="contact-item chunky" delay={200}>
                             <div className="contact-item-icon" aria-hidden="true">📍</div>
                             <div className="contact-item-text">
                                 <h3>ที่อยู่</h3>
                                 <p>อ.บางใหญ่ จ.นนทบุรี</p>
                             </div>
-                        </div>
+                        </Reveal>
 
-                        <div className="contact-item chunky animate-fade-in-up delay-5">
+                        <Reveal className="contact-item chunky" delay={300}>
                             <div className="contact-item-icon" aria-hidden="true">🔗</div>
                             <div className="contact-item-text">
                                 <h3>GitHub</h3>
@@ -128,16 +137,26 @@ function Contact() {
                                     </a>
                                 </p>
                             </div>
-                        </div>
+                        </Reveal>
                     </div>
 
                     {/* Contact Form — สไลด์ 11 - Controlled Components */}
-                    <div className="contact-form-wrapper chunky animate-fade-in-up delay-3">
+                    <Reveal className="contact-form-wrapper chunky" delay={150}>
                         <span className="form-sticker" aria-hidden="true">Say hi!</span>
                         <h3>ส่งข้อความถึงฉัน ✍️</h3>
 
                         {status === 'sent' || status === 'mailto' ? (
                             <div className="form-success" role="status">
+                                {status === 'sent' && (
+                                    <div className="confetti" aria-hidden="true">
+                                        {CONFETTI.map((c, i) => (
+                                            <span
+                                                key={i}
+                                                style={{ '--x': c.x, '--y': c.y, '--r': c.r, background: c.color }}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
                                 <div className="success-icon" aria-hidden="true">{status === 'sent' ? '🎉' : '📨'}</div>
                                 <p>
                                     {status === 'sent'
@@ -215,7 +234,7 @@ function Contact() {
                                 </button>
                             </form>
                         )}
-                    </div>
+                    </Reveal>
                 </div>
             </div>
         </div>

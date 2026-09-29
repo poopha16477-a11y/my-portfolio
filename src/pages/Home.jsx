@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BouncyText from '../components/BouncyText';
+import Reveal from '../components/Reveal';
 import { splitGraphemes } from '../utils/graphemes';
 import './Home.css';
 
@@ -14,13 +15,67 @@ const ROLES = [
 const GREETINGS = ['สวัสดีครับ!', 'Hello!', 'ยินดีที่ได้รู้จัก', 'กดอีกทีสิ :)'];
 
 // ใช้ทั้งในแถบเลื่อนและการ์ดทักษะ แก้ที่นี่ที่เดียว
-const SKILLS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'Java', 'C++', 'Dart', 'Firebase', 'Microcontroller'];
+const SKILLS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'Java', 'C++', 'Dart', 'Firebase', 'SQL', 'Microcontroller'];
+
+// แถบเลื่อนแถวที่สอง (วิ่งสวนทาง)
+const INTERESTS = ['Web Development', 'Electronics', 'Hardware', 'Microcontroller', 'UI ที่เล่นได้', 'Always Learning'];
 
 const STICKERS = [
     { label: 'React', className: 'sticker-1' },
     { label: 'Python', className: 'sticker-2' },
     { label: 'Dart', className: 'sticker-3' },
     { label: 'Firebase', className: 'sticker-4' },
+];
+
+function Marquee({ items, className, label, hidden = false }) {
+    return (
+        <div className={`marquee ${className}`} aria-label={label} aria-hidden={hidden || undefined}>
+            <div className="marquee-track">
+                {[...items, ...items].map((item, i) => (
+                    <span key={i} className="marquee-item" aria-hidden={i >= items.length || undefined}>
+                        {item} <span className="marquee-star">✦</span>
+                    </span>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// งานอดิเรก แบ่งตามหมวด
+const HOBBIES = [
+    {
+        category: 'Sports',
+        th: 'กีฬา',
+        icon: '🏆',
+        tone: 'gold',
+        items: [
+            { emoji: '⚽', label: 'ฟุตบอล' },
+            { emoji: '🥅', label: 'ฟุตซอล' },
+            { emoji: '🏐', label: 'วอลเลย์บอล' },
+            { emoji: '🏸', label: 'แบดมินตัน' },
+        ],
+    },
+    {
+        category: 'Music',
+        th: 'ดนตรี',
+        icon: '🎵',
+        tone: 'light',
+        items: [
+            { emoji: '🎸', label: 'กีตาร์' },
+            { emoji: '🥁', label: 'กลอง' },
+        ],
+    },
+    {
+        category: 'Outdoor & Giving',
+        th: 'กิจกรรม',
+        icon: '🌿',
+        tone: 'navy',
+        items: [
+            { emoji: '🌲', label: 'เที่ยวป่า' },
+            { emoji: '🥾', label: 'เดินป่า' },
+            { emoji: '🎁', label: 'แจกของตามแถบชนบท' },
+        ],
+    },
 ];
 
 // ข้อความพิมพ์เอง-ลบเอง วนตาม ROLES
@@ -162,22 +217,17 @@ function Home() {
                 </div>
             </section>
 
-            {/* Skills Marquee */}
-            <div className="marquee" aria-label="ทักษะ">
-                <div className="marquee-track">
-                    {[...SKILLS, ...SKILLS].map((skill, i) => (
-                        <span key={i} className="marquee-item" aria-hidden={i >= SKILLS.length}>
-                            {skill} <span className="marquee-star">✦</span>
-                        </span>
-                    ))}
-                </div>
+            {/* Skills Marquee — 2 แถบไขว้กัน วิ่งสวนทาง */}
+            <div className="marquee-stack">
+                <Marquee items={INTERESTS} className="marquee-b" hidden />
+                <Marquee items={SKILLS} className="marquee-a" label="ทักษะ" />
             </div>
 
             {/* About Section */}
             <section className="about-section section">
                 <div className="container">
-                    <span className="section-label">เกี่ยวกับฉัน</span>
-                    <h2 className="section-title">About Me</h2>
+                    <Reveal as="span" className="section-label">เกี่ยวกับฉัน</Reveal>
+                    <Reveal as="h2" className="section-title" delay={80}>About Me</Reveal>
 
                     <div className="about-grid">
                         {[
@@ -200,9 +250,11 @@ function Home() {
                                 body: 'ต้องการพัฒนาทักษะด้านการเขียนโปรแกรมและสร้างผลงานที่มีคุณค่า',
                                 className: 'card-goal',
                             },
-                        ].map((card) => (
-                            <button
+                        ].map((card, i) => (
+                            <Reveal
+                                as="button"
                                 type="button"
+                                delay={150 + i * 120}
                                 key={card.title}
                                 className={`about-card ${card.className} ${wiggling === card.title ? 'wiggle' : ''}`}
                                 onClick={() => setWiggling(card.title)}
@@ -218,7 +270,53 @@ function Home() {
                                         ))}
                                     </span>
                                 )}
-                            </button>
+                            </Reveal>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Hobbies Section */}
+            <section className="hobbies-section section">
+                <div className="hobbies-doodles" aria-hidden="true">
+                    <span className="doodle doodle-star">✦</span>
+                    <span className="doodle doodle-ring"></span>
+                    <span className="doodle doodle-dots"></span>
+                </div>
+
+                <div className="container">
+                    <Reveal as="span" className="section-label">งานอดิเรก</Reveal>
+                    <Reveal as="h2" className="section-title" delay={80}>Hobbies</Reveal>
+                    <Reveal as="p" className="hobbies-intro" delay={140}>
+                        นอกจากเขียนโค้ดแล้ว เวลาว่างผมชอบทำสิ่งเหล่านี้
+                    </Reveal>
+
+                    <div className="hobbies-grid">
+                        {HOBBIES.map((group, i) => (
+                            <Reveal
+                                key={group.category}
+                                className={`hobby-card chunky tone-${group.tone}`}
+                                delay={200 + i * 130}
+                            >
+                                <div className="hobby-card-head">
+                                    <span className="hobby-card-icon" aria-hidden="true">{group.icon}</span>
+                                    <div>
+                                        <h3>{group.category}</h3>
+                                        <span className="hobby-card-th">{group.th}</span>
+                                    </div>
+                                    <span className="hobby-count" aria-label={`${group.items.length} อย่าง`}>
+                                        {group.items.length}
+                                    </span>
+                                </div>
+                                <ul className="hobby-chips">
+                                    {group.items.map((item, j) => (
+                                        <li key={item.label} className="hobby-chip" style={{ '--tilt': `${j % 2 ? 2 : -2}deg` }}>
+                                            <span className="hobby-chip-emoji" aria-hidden="true">{item.emoji}</span>
+                                            {item.label}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Reveal>
                         ))}
                     </div>
                 </div>

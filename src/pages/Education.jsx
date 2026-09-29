@@ -1,10 +1,11 @@
 import PageHeader from '../components/PageHeader';
+import Reveal from '../components/Reveal';
 import './Education.css';
 
 // สไลด์ 05 - Component: แยก TimelineItem เป็น Component ย่อย รับ props
 function TimelineItem({ year, title, institution, description, icon, current, delay }) {
     return (
-        <div className={`timeline-item animate-fade-in-up delay-${delay}`}>
+        <Reveal className="timeline-item" delay={delay}>
             <div className="timeline-dot" aria-hidden="true">{icon}</div>
             <div className="timeline-card chunky">
                 <div className="timeline-meta">
@@ -15,7 +16,7 @@ function TimelineItem({ year, title, institution, description, icon, current, de
                 <p className="institution">{institution}</p>
                 <p>{description}</p>
             </div>
-        </div>
+        </Reveal>
     );
 }
 
@@ -63,7 +64,7 @@ function Education() {
                             description={item.description}
                             icon={item.icon}
                             current={item.current}
-                            delay={index + 2}
+                            delay={index * 120}
                         />
                     ))}
                 </div>

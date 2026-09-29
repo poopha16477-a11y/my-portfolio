@@ -270,3 +270,47 @@
         flex-wrap: wrap;
     }
 }
+
+/* Confetti burst when a message is sent */
+.form-success {
+    position: relative;
+}
+
+.confetti {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    pointer-events: none;
+}
+
+.confetti span {
+    position: absolute;
+    width: 10px;
+    height: 14px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 3px;
+    opacity: 0;
+    animation: confetti-burst 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.confetti span:nth-child(3n) {
+    border-radius: 50%;
+    width: 11px;
+    height: 11px;
+}
+
+@keyframes confetti-burst {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(0.4);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--x), calc(var(--y) + 60px)) rotate(var(--r)) scale(1);
+    }
+}

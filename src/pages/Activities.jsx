@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PageHeader from '../components/PageHeader';
+import Reveal from '../components/Reveal';
 import './Activities.css';
 
 // ข้อมูลกิจกรรม (สามารถแก้ไขได้ตามต้องการ)
@@ -111,12 +112,13 @@ function Activities() {
                 {/* Activity Cards */}
                 <div className="activities-grid">
                     {filteredActivities.map((item, index) => (
-                        <div
-                            key={item.id}
+                        <Reveal
+                            key={`${activeFilter}-${item.id}`}
+                            delay={(index % 3) * 110}
                             role="button"
                             tabIndex={0}
                             aria-expanded={expandedId === item.id}
-                            className={`activity-card chunky cat-${item.category} animate-fade-in-up delay-${Math.min(index + 2, 6)} ${expandedId === item.id ? 'expanded' : ''}`}
+                            className={`activity-card chunky cat-${item.category} ${expandedId === item.id ? 'expanded' : ''}`}
                             onClick={() => handleCardClick(item.id)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter' || e.key === ' ') {
@@ -158,7 +160,7 @@ function Activities() {
                             <span className="activity-card-toggle" aria-hidden="true">
                                 {expandedId === item.id ? 'ย่อ' : 'ดูเพิ่ม'} <span className="toggle-plus">+</span>
                             </span>
-                        </div>
+                        </Reveal>
                     ))}
                 </div>
             </div>
