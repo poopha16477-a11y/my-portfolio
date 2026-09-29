@@ -13,7 +13,8 @@ const ROLES = [
 
 const GREETINGS = ['สวัสดีครับ!', 'Hello!', 'ยินดีที่ได้รู้จัก', 'กดอีกทีสิ :)'];
 
-const SKILLS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'Java', 'C++', 'Dart', 'Firebase'];
+// ใช้ทั้งในแถบเลื่อนและการ์ดทักษะ แก้ที่นี่ที่เดียว
+const SKILLS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'Java', 'C++', 'Dart', 'Firebase', 'Microcontroller'];
 
 const STICKERS = [
     { label: 'React', className: 'sticker-1' },
@@ -185,12 +186,12 @@ function Home() {
                                 title: 'การศึกษา',
                                 body: 'กำลังศึกษาอยู่ในระดับปริญญาตรี สาขา เทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์ มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ',
                                 className: 'card-edu',
-                                tags: ['ปริญญาตรี', 'อิเล็กทรอนิกส์', 'มจพ.'],
+                                tags: ['ปริญญาตรี', 'อิเล็กทรอนิกส์', 'คอมพิวเตอร์', 'มจพ.'],
                             },
                             {
                                 icon: '💻',
                                 title: 'ทักษะ',
-                                body: 'มีความรู้ด้าน HTML, CSS, JavaScript, React, Python, Java, C++, Dart, Firebase',
+                                body: `มีความรู้ด้าน ${SKILLS.join(', ')}`,
                                 className: 'card-skill',
                             },
                             {
