@@ -47,6 +47,30 @@ function Marquee({ items, className, label, hidden = false }) {
     );
 }
 
+// ตำแหน่งฝึกงานที่สนใจ พร้อมทักษะ/เครื่องมือที่เกี่ยวข้อง
+const INTERNSHIP_INTERESTS = [
+    {
+        icon: '📱',
+        title: 'Software & Mobile Application Development',
+        related: ['Dart', 'Java', 'Python', 'C++'],
+    },
+    {
+        icon: '🌐',
+        title: 'Web Development',
+        related: ['React', 'JavaScript', 'HTML/CSS', 'PHP'],
+    },
+    {
+        icon: '🔌',
+        title: 'Embedded Systems & IoT',
+        related: ['Arduino', 'Raspberry Pi', 'MQTT', 'Microcontroller'],
+    },
+    {
+        icon: '🖥️',
+        title: 'IT & System Engineering',
+        related: ['SQL', 'PostgreSQL', 'Firebase'],
+    },
+];
+
 // งานอดิเรก แบ่งตามหมวด
 const HOBBIES = [
     {
@@ -278,6 +302,44 @@ function Home() {
                             </div>
                         </Reveal>
                     </div>
+                </div>
+            </section>
+
+            {/* Internship Interests Section */}
+            <section className="internship-section section">
+                <div className="container">
+                    <div className="internship-head">
+                        <div>
+                            <Reveal as="span" className="section-label">ตำแหน่งที่สนใจ</Reveal>
+                            <Reveal as="h2" className="section-title" delay={80}>Internship Interests</Reveal>
+                        </div>
+                        <Reveal as="span" className="open-badge" delay={160}>
+                            <span className="open-dot" aria-hidden="true"></span>
+                            Open to internship
+                        </Reveal>
+                    </div>
+
+                    <ol className="internship-grid">
+                        {INTERNSHIP_INTERESTS.map((item, i) => (
+                            <Reveal as="li" key={item.title} className="internship-card" delay={200 + i * 110}>
+                                <span className="internship-num" aria-hidden="true">0{i + 1}</span>
+                                <span className="internship-icon" aria-hidden="true">{item.icon}</span>
+                                <h3>{item.title}</h3>
+                                <ul className="chip-list">
+                                    {item.related.map((r) => (
+                                        <li key={r} className="chip">{r}</li>
+                                    ))}
+                                </ul>
+                            </Reveal>
+                        ))}
+                    </ol>
+
+                    <Reveal className="internship-cta" delay={300}>
+                        <p>กำลังมองหาที่ฝึกงานในสายงานเหล่านี้ สนใจพูดคุยติดต่อได้เลย</p>
+                        <Link to="/contact" className="btn btn-primary">
+                            Contact me <span className="btn-arrow" aria-hidden="true">→</span>
+                        </Link>
+                    </Reveal>
                 </div>
             </section>
 

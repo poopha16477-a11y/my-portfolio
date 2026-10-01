@@ -514,6 +514,148 @@
     color: var(--text-primary);
 }
 
+/* ----- Internship Interests ----- */
+.internship-section {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+}
+
+.internship-section .section-label {
+    color: var(--gold);
+}
+
+.internship-section .section-title {
+    color: var(--bg-primary);
+}
+
+.internship-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.open-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--space-lg);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: var(--gold);
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 2px solid var(--bg-primary);
+    box-shadow: 3px 3px 0 var(--bg-primary);
+}
+
+.open-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1F8A4C;
+    animation: open-pulse 1.6s ease-out infinite;
+}
+
+@keyframes open-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(31, 138, 76, 0.7); }
+    100% { box-shadow: 0 0 0 10px rgba(31, 138, 76, 0); }
+}
+
+.internship-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.internship-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 2px solid var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: 5px 5px 0 var(--gold);
+    transition: transform 0.3s var(--pop), box-shadow 0.3s var(--pop);
+}
+
+.internship-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--gold);
+}
+
+.internship-num {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.internship-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    font-size: 1.6rem;
+    background: var(--bg-secondary);
+    border: 2px solid var(--text-primary);
+    border-radius: 16px;
+    transition: transform 0.4s var(--pop);
+}
+
+.internship-card:hover .internship-icon {
+    transform: rotate(-12deg) scale(1.12);
+}
+
+.internship-card h3 {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.internship-card .chip {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+}
+
+.internship-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border: 2px dashed rgba(249, 247, 243, 0.4);
+    border-radius: var(--radius-lg);
+}
+
+.internship-cta p {
+    color: rgba(249, 247, 243, 0.85);
+}
+
+.internship-cta .btn {
+    border-color: var(--bg-primary);
+    box-shadow: 4px 4px 0 var(--bg-primary);
+}
+
+.internship-cta .btn:hover {
+    box-shadow: 6px 6px 0 var(--bg-primary);
+}
+
 /* ----- Hobbies ----- */
 .hobbies-section {
     position: relative;
@@ -725,6 +867,12 @@
     }
 }
 
+@media (max-width: 1000px) {
+    .internship-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 900px) {
     .hobbies-grid {
         grid-template-columns: 1fr;
@@ -745,6 +893,16 @@
     }
 
     .about-card {
+        padding: var(--space-md);
+    }
+}
+
+@media (max-width: 560px) {
+    .internship-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .internship-cta {
         padding: var(--space-md);
     }
 }
