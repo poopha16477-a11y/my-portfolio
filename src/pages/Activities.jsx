@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Lightbox from '../components/Lightbox';
 import PageHeader from '../components/PageHeader';
 import Reveal from '../components/Reveal';
 import './Activities.css';
@@ -38,13 +39,28 @@ const activitiesData = [
     },
     {
         id: 4,
-        title: 'แข่งขันเขียนโปรแกรม',
-        category: 'competition',
-        date: '2565',
-        icon: '🏆',
-        tag: 'Competition',
-        description: 'เข้าร่วมการแข่งขันเขียนโปรแกรมระดับมหาวิทยาลัย',
-        detail: 'แข่งขันแก้ปัญหา Algorithm และ Data Structure ได้เรียนรู้ทักษะการแก้ปัญหาและการทำงานภายใต้ความกดดัน',
+        title: 'AMS — ระบบจัดการหอพัก',
+        category: 'project',
+        icon: '🏢',
+        image: '/projects/ams-admin-dashboard.webp',
+        imageStyle: 'screenshot',
+        tag: 'Project',
+        description: 'Apartment Management System เว็บจัดการหอพักแยกฝั่ง Admin และผู้เช่า จัดการห้องพัก จดมิเตอร์น้ำ-ไฟ คำนวณค่าเช่าอัตโนมัติ ออกใบแจ้งหนี้ QR พร้อมเพย์ และแจ้งซ่อมออนไลน์',
+        detail: 'พัฒนาแบบ Agile (Scrum) 3 Sprint เริ่มจากเก็บ Requirement ด้วยแบบสอบถามกับผู้ดูแลหอและผู้เช่า ออกแบบระบบด้วย Use Case, Class, Activity และ ER Diagram และใช้ Design Pattern 4 แบบ ได้แก่ Proxy (ตรวจสิทธิ์ Admin/ผู้เช่า), Strategy (สูตรคำนวณบิล), Observer (ระบบแจ้งเตือน) และ Facade (ระบบแจ้งซ่อม) ตัวระบบเขียนด้วย PHP เชื่อมต่อฐานข้อมูล PostgreSQL ผ่าน PDO และวางแผนนำขึ้นใช้งานจริงด้วย Docker',
+        tech: ['PHP', 'PostgreSQL', 'HTML', 'CSS', 'Scrum', 'UML', 'Design Patterns'],
+        links: [
+            { label: 'Source code', href: 'https://github.com/nowsirasak/Apartment_System' },
+        ],
+        gallery: [
+            { src: '/projects/ams-login.webp', caption: 'หน้าเข้าสู่ระบบ Admin' },
+            { src: '/projects/ams-admin-dashboard.webp', caption: 'Dashboard ฝั่ง Admin' },
+            { src: '/projects/ams-rooms.webp', caption: 'จัดการข้อมูลห้องพัก' },
+            { src: '/projects/ams-admin-billing.webp', caption: 'จัดการบิลค่าใช้จ่ายและตรวจสลิป' },
+            { src: '/projects/ams-tenant-signup.webp', caption: 'สมัครสมาชิกฝั่งผู้เช่า' },
+            { src: '/projects/ams-tenant-dashboard.webp', caption: 'หน้าหลักฝั่งผู้เช่า' },
+            { src: '/projects/ams-tenant-booking.webp', caption: 'จองห้องพักฝั่งผู้เช่า' },
+            { src: '/projects/ams-tenant-repair.webp', caption: 'แจ้งซ่อมของชำรุดฝั่งผู้เช่า' },
+        ],
     },
     {
         id: 5,
@@ -67,13 +83,14 @@ const categories = [
     { key: 'project', label: 'Projects' },
     { key: 'training', label: 'Training' },
     { key: 'volunteer', label: 'Volunteer' },
-    { key: 'competition', label: 'Competition' },
 ];
 
 function Activities() {
     // สไลด์ 07 - useState สำหรับ filter และ expand
     const [activeFilter, setActiveFilter] = useState('all');
     const [expandedId, setExpandedId] = useState(null);
+    // รูปที่เปิดดูขนาดใหญ่: { images, index } หรือ null
+    const [viewer, setViewer] = useState(null);
 
     // สไลด์ 06 - Event Handling
     const handleFilterClick = (category) => {
@@ -128,7 +145,7 @@ function Activities() {
                                 }
                             }}
                         >
-                            <div className={`activity-card-image ${item.image ? 'has-photo' : ''}`}>
+                            <div className={`activity-card-image ${item.image ? 'has-photo' : ''} ${item.imageStyle === 'screenshot' ? 'is-screenshot' : ''}`}>
                                 {item.image ? (
                                     <img src={item.image} alt={item.title} className="activity-card-photo" loading="lazy" />
                                 ) : (
@@ -149,24 +166,47 @@ function Activities() {
                                 )}
                             </div>
                             <div className="activity-card-detail">
-                                <div className="activity-card-detail-inner">
-                                    {item.detail}
-                                    {item.links && (
-                                        <span className="activity-card-links">
-                                            {item.links.map((link) => (
-                                                <a
-                                                    key={link.href}
-                                                    href={link.href}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    tabIndex={expandedId === item.id ? 0 : -1}
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    {link.label} ↗
-                                                </a>
-                                            ))}
-                                        </span>
-                                    )}
+                                <div className="activity-card-detail-clip">
+                                    <div className="activity-card-detail-inner">
+                                        {item.detail}
+                                        {item.gallery && (
+                                            <span className="activity-card-gallery">
+                                                {item.gallery.map((img, i) => (
+                                                    <button
+                                                        key={img.src}
+                                                        type="button"
+                                                        className="gallery-thumb"
+                                                        tabIndex={expandedId === item.id ? 0 : -1}
+                                                        aria-label={`ดูรูป: ${img.caption}`}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setViewer({ images: item.gallery, index: i });
+                                                        }}
+                                                        onKeyDown={(e) => e.stopPropagation()}
+                                                    >
+                                                        <img src={img.src} alt="" loading="lazy" />
+                                                        <span>{img.caption}</span>
+                                                    </button>
+                                                ))}
+                                            </span>
+                                        )}
+                                        {item.links && (
+                                            <span className="activity-card-links">
+                                                {item.links.map((link) => (
+                                                    <a
+                                                        key={link.href}
+                                                        href={link.href}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        tabIndex={expandedId === item.id ? 0 : -1}
+                                                        onClick={(e) => e.stopPropagation()}
+                                                    >
+                                                        {link.label} ↗
+                                                    </a>
+                                                ))}
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                             <span className="activity-card-toggle" aria-hidden="true">
@@ -176,6 +216,15 @@ function Activities() {
                     ))}
                 </div>
             </div>
+
+            {viewer && (
+                <Lightbox
+                    images={viewer.images}
+                    index={viewer.index}
+                    onClose={() => setViewer(null)}
+                    onChange={(index) => setViewer({ ...viewer, index })}
+                />
+            )}
         </div>
     );
 }

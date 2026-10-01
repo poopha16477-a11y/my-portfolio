@@ -101,11 +101,6 @@
     background-color: var(--bg-card);
 }
 
-.cat-competition .activity-card-image {
-    background-color: var(--accent);
-    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2.5px);
-}
-
 .activity-card-emoji {
     display: grid;
     place-items: center;
@@ -172,14 +167,20 @@
 }
 
 /* Expanded Card */
+/* ใช้ grid-template-rows 0fr → 1fr ให้ขยายได้พอดีกับเนื้อหาทุกขนาด */
 .activity-card-detail {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.45s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s ease;
 }
 
 .activity-card.expanded .activity-card-detail {
-    max-height: 240px;
+    grid-template-rows: 1fr;
+}
+
+.activity-card-detail-clip {
+    min-height: 0;
+    overflow: hidden;
 }
 
 .activity-card-detail-inner {
@@ -289,4 +290,79 @@
     border-radius: 999px;
     border: 1.5px solid var(--text-primary);
     background: var(--bg-secondary);
+}
+
+/* Screenshot cover (เว็บ/แอป) */
+.activity-card-image.is-screenshot .activity-card-photo {
+    inset: 22px 22px 0;
+    width: calc(100% - 44px);
+    height: calc(100% - 22px);
+    object-fit: cover;
+    object-position: top left;
+    border: 2px solid var(--text-primary);
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+    background: var(--bg-card);
+    filter: none;
+    box-shadow: 4px -2px 0 rgba(18, 36, 58, 0.18);
+}
+
+.activity-card:hover .activity-card-image.is-screenshot .activity-card-photo {
+    transform: translateY(-6px);
+}
+
+/* Gallery thumbnails inside the expanded detail */
+.activity-card-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: var(--space-sm);
+}
+
+.gallery-thumb {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1.5px solid var(--text-primary);
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 var(--text-primary);
+    transition: transform 0.2s var(--pop), box-shadow 0.2s var(--pop);
+}
+
+.gallery-thumb img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top left;
+    border-radius: 6px;
+}
+
+.gallery-thumb span {
+    padding: 0 2px 2px;
+    line-height: 1.3;
+}
+
+.gallery-thumb:hover {
+    transform: translate(-2px, -2px) rotate(-1deg);
+    box-shadow: 4px 4px 0 var(--text-primary);
+}
+
+.gallery-thumb:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+/* รูปสุดท้ายที่เหลือเดี่ยว ให้กว้างเต็มแถว */
+.gallery-thumb:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
+.gallery-thumb:last-child:nth-child(odd) img {
+    aspect-ratio: 21 / 9;
 }
