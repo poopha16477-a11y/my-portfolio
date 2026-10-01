@@ -10,6 +10,7 @@ const activitiesData = [
         id: 1,
         title: 'เครื่องออกกำลังกายสำหรับขา',
         category: 'project',
+        date: '2569',
         icon: '🦵',
         image: '/projects/leg-exercise-machine.webp',
         tag: 'Project',
@@ -29,18 +30,31 @@ const activitiesData = [
     },
     {
         id: 3,
-        title: 'กิจกรรมค่ายอาสา',
+        title: 'กิจกรรมอาสาประจำปี',
         category: 'volunteer',
-        date: '2565',
+        date: 'ทุกปี',
         icon: '🤝',
+        image: '/projects/volunteer-2.webp',
+        imageStyle: 'photo',
         tag: 'Volunteer',
-        description: 'เข้าร่วมค่ายอาสาพัฒนาชุมชน สอนคอมพิวเตอร์เบื้องต้นให้นักเรียน',
-        detail: 'สอนการใช้งานคอมพิวเตอร์และอินเทอร์เน็ตเบื้องต้นให้กับนักเรียนในพื้นที่ห่างไกล',
+        description: 'ในทุกๆ ปีจะไปทำกิจกรรมอาสา แจกของ และทำอาหารเลี้ยงนักเรียนในถิ่นทุรกันดาร รวมถึงไปมอบเสบียงให้เจ้าหน้าที่ตามแนวชายแดน',
+        detail: 'ร่วมกับกลุ่มอาสาเดินทางเข้าไปในพื้นที่ห่างไกล ขนของบริจาคไปมอบให้โรงเรียนและชุมชน ทำอาหารเลี้ยงและเล่นเกมกับน้องๆ นักเรียน และนำเสบียงไปมอบให้ทหารพรานที่ประจำการตามแนวชายแดน',
+        gallery: [
+            { src: '/projects/volunteer-1.webp', caption: 'มอบเสบียงให้ทหารพรานตามแนวชายแดน' },
+            { src: '/projects/volunteer-2.webp', caption: 'ทำกิจกรรมกับน้องๆ นักเรียน' },
+            { src: '/projects/volunteer-3.webp', caption: 'ช่วยทำอาหารเลี้ยงน้องๆ' },
+            { src: '/projects/volunteer-4.webp', caption: 'เล่นเกมกับน้องๆ ในโรงเรียน' },
+            { src: '/projects/volunteer-5.webp', caption: 'ขนของบริจาคเข้าพื้นที่' },
+            { src: '/projects/volunteer-6.webp', caption: 'มอบสิ่งของบริจาคให้ชุมชน' },
+            { src: '/projects/volunteer-7.webp', caption: 'แจกขนมให้น้องๆ' },
+            { src: '/projects/volunteer-8.webp', caption: 'เลี้ยงอาหารนักเรียนในพื้นที่ห่างไกล' },
+        ],
     },
     {
         id: 4,
         title: 'AMS — ระบบจัดการหอพัก',
         category: 'project',
+        date: '2568',
         icon: '🏢',
         image: '/projects/ams-admin-dashboard.webp',
         imageStyle: 'screenshot',
@@ -145,7 +159,7 @@ function Activities() {
                                 }
                             }}
                         >
-                            <div className={`activity-card-image ${item.image ? 'has-photo' : ''} ${item.imageStyle === 'screenshot' ? 'is-screenshot' : ''}`}>
+                            <div className={`activity-card-image ${item.image ? 'has-photo' : ''} ${item.imageStyle ? `is-${item.imageStyle}` : ''}`}>
                                 {item.image ? (
                                     <img src={item.image} alt={item.title} className="activity-card-photo" loading="lazy" />
                                 ) : (

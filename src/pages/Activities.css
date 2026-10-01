@@ -311,6 +311,19 @@
     transform: translateY(-6px);
 }
 
+/* Full-bleed photo cover (ภาพถ่ายกิจกรรม) */
+.activity-card-image.is-photo .activity-card-photo {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: none;
+}
+
+.activity-card:hover .activity-card-image.is-photo .activity-card-photo {
+    transform: scale(1.05);
+}
+
 /* Gallery thumbnails inside the expanded detail */
 .activity-card-gallery {
     display: grid;
