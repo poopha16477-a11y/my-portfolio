@@ -19,7 +19,7 @@ const SKILL_GROUPS = [
     { label: 'Web', items: ['HTML', 'CSS', 'JavaScript', 'React'] },
     { label: 'Programming', items: ['Python', 'Java', 'C++', 'Dart'] },
     { label: 'Data', items: ['Firebase', 'SQL'] },
-    { label: 'Hardware', items: ['Microcontroller'] },
+    { label: 'Hardware & IoT', items: ['Microcontroller', 'Arduino', 'ESP32', 'I2C', 'Electronic Circuits', 'MQTT'] },
 ];
 const SKILLS = SKILL_GROUPS.flatMap((group) => group.items);
 
