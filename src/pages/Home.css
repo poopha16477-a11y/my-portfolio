@@ -98,8 +98,8 @@
 }
 
 .hero-en {
-    font-family: var(--font-heading);
-    font-style: italic;
+    font-family: var(--font-body);
+    font-weight: 500;
     font-size: 1.25rem;
     color: var(--text-secondary);
     margin-bottom: var(--space-md);
@@ -595,8 +595,8 @@
     position: absolute;
     top: 14px;
     right: 16px;
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--gold);
     line-height: 1;

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { ArrowLeft, ArrowRight, X } from '@phosphor-icons/react';
 import { createPortal } from 'react-dom';
 import './Lightbox.css';
 
@@ -39,7 +40,7 @@ function Lightbox({ images, index, onClose, onChange }) {
                             aria-label="รูปก่อนหน้า"
                             onClick={() => onChange((index - 1 + images.length) % images.length)}
                         >
-                            ←
+                            <ArrowLeft weight="bold" />
                         </button>
                         <button
                             type="button"
@@ -47,12 +48,12 @@ function Lightbox({ images, index, onClose, onChange }) {
                             aria-label="รูปถัดไป"
                             onClick={() => onChange((index + 1) % images.length)}
                         >
-                            →
+                            <ArrowRight weight="bold" />
                         </button>
                     </>
                 )}
                 <button type="button" className="lightbox-close" aria-label="ปิด" onClick={onClose} autoFocus>
-                    ✕
+                    <X weight="bold" />
                 </button>
             </figure>
         </div>,

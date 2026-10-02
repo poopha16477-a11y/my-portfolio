@@ -1,5 +1,8 @@
-/* ===== Google Fonts ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* ===== Fonts =====
+   self-host ผ่าน @fontsource (import ใน main.jsx)
+   - IBM Plex Sans Thai: เนื้อหา (ไทย+อังกฤษ)
+   - Bricolage Grotesque: หัวข้อ (ตัวไทยใช้ Plex Thai แทนอัตโนมัติ)
+   - IBM Plex Mono: ป้ายเล็ก ปี ตัวเลข */
 
 /* ===== Design Tokens ===== */
 :root {
@@ -15,8 +18,9 @@
   --border: #E8E1D3;
   --border-light: #F2EFE8;
 
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'IBM Plex Sans Thai', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Bricolage Grotesque Variable', 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'IBM Plex Sans Thai', ui-monospace, monospace;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -73,8 +77,9 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.3;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
@@ -135,10 +140,11 @@ textarea {
 }
 
 .section-label {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: var(--space-sm);
@@ -520,4 +526,24 @@ html {
   h2 {
     font-size: 1.5rem;
   }
+}
+/* ===== Icons (Phosphor SVG) ===== */
+svg {
+  flex-shrink: 0;
+}
+
+.inline-icon {
+  vertical-align: -0.12em;
+}
+
+/* กล่องไอคอนพื้นสว่าง: ใช้สีเข้มเสมอ แม้อยู่ในการ์ดสีกรมท่า */
+.about-card-icon,
+.hobby-card-icon,
+.internship-icon,
+.timeline-dot,
+.contact-item-icon,
+.activity-card-emoji,
+.hobby-chip-emoji,
+.pill-emoji {
+  color: var(--text-primary);
 }

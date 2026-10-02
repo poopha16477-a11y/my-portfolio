@@ -2,7 +2,7 @@ import BouncyText from './BouncyText';
 import './PageHeader.css';
 
 // หัวข้อของแต่ละหน้า ใช้ร่วมกันทุกหน้า
-function PageHeader({ emoji, label, title, children }) {
+function PageHeader({ icon: Icon, label, title, children }) {
     return (
         <header className="page-header">
             <div className="page-doodles" aria-hidden="true">
@@ -16,7 +16,7 @@ function PageHeader({ emoji, label, title, children }) {
             </div>
 
             <span className="pill-label animate-fade-in-up">
-                <span className="pill-emoji" aria-hidden="true">{emoji}</span> {label}
+                <span className="pill-emoji" aria-hidden="true"><Icon /></span> {label}
             </span>
             <h1 className="page-title animate-fade-in-up delay-1">
                 <BouncyText text={title} />

@@ -1,12 +1,13 @@
 import PageHeader from '../components/PageHeader';
+import { Backpack, BookOpen, GraduationCap, Lightning } from '@phosphor-icons/react';
 import Reveal from '../components/Reveal';
 import './Education.css';
 
 // สไลด์ 05 - Component: แยก TimelineItem เป็น Component ย่อย รับ props
-function TimelineItem({ year, title, institution, description, icon, current, delay }) {
+function TimelineItem({ year, title, institution, description, icon: Icon, current, delay }) {
     return (
         <Reveal className="timeline-item" delay={delay}>
-            <div className="timeline-dot" aria-hidden="true">{icon}</div>
+            <div className="timeline-dot" aria-hidden="true"><Icon /></div>
             <div className="timeline-card chunky">
                 <div className="timeline-meta">
                     <span className="timeline-year">{year}</span>
@@ -27,7 +28,7 @@ const educationData = [
         title: 'ปริญญาตรี สาขาเทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์แขนงคอมพิวเตอร์',
         institution: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ',
         description: 'กำลังศึกษาในระดับปริญญาตรี เรียนรู้เกี่ยวกับการพัฒนาซอฟต์แวร์ เว็บแอปพลิเคชัน และเทคโนโลยีสมัยใหม่',
-        icon: '🎓',
+        icon: GraduationCap,
         current: true,
     },
     {
@@ -35,14 +36,14 @@ const educationData = [
         title: 'ประกาศนียบัตรวิชาชีพ (ปวช.) ',
         institution: 'มหาวิทยาลัยเทคโนโลยีราชมงคลพระนคร วิทยาเขตพระนครเหนือ',
         description: 'สำเร็จการศึกษาระดับประกาศนียบัตรวิชาชีพ (ปวช.) สาขาช่างไฟฟ้ากำลัง',
-        icon: '⚡',
+        icon: Lightning,
     },
     {
         year: '2560 — 2562',
         title: 'มัธยมศึกษาตอนต้น',
         institution: 'โรงเรียนเทพศิรินทร์ นนทบุรี',
         description: 'สำเร็จการศึกษาระดับมัธยมศึกษาตอนต้น แผนการเรียน mep',
-        icon: '📘',
+        icon: BookOpen,
     },
 ];
 
@@ -50,7 +51,7 @@ function Education() {
     return (
         <div className="education-page">
             <div className="container section">
-                <PageHeader emoji="🎒" label="การศึกษา" title="Education">
+                <PageHeader icon={Backpack} label="การศึกษา" title="Education">
                     ประวัติการศึกษาของฉัน ตั้งแต่อดีตจนถึงปัจจุบัน
                 </PageHeader>
 

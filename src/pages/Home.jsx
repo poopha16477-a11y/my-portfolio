@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Boot, Circuitry, Code, DeviceMobile, Gift, Globe, GraduationCap, Guitar, HandWaving, HardDrives, Metronome, Mountains, MusicNotes, Racquet, SneakerMove, SoccerBall, Target, Tree, Trophy, Volleyball } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import BouncyText from '../components/BouncyText';
 import Reveal from '../components/Reveal';
@@ -50,22 +51,22 @@ function Marquee({ items, className, label, hidden = false }) {
 // ตำแหน่งฝึกงานที่สนใจ พร้อมทักษะ/เครื่องมือที่เกี่ยวข้อง
 const INTERNSHIP_INTERESTS = [
     {
-        icon: '📱',
+        icon: DeviceMobile,
         title: 'Software & Mobile Application Development',
         related: ['Dart', 'Java', 'Python', 'C++'],
     },
     {
-        icon: '🌐',
+        icon: Globe,
         title: 'Web Development',
         related: ['React', 'JavaScript', 'HTML/CSS', 'PHP'],
     },
     {
-        icon: '🔌',
+        icon: Circuitry,
         title: 'Embedded Systems & IoT',
         related: ['Arduino', 'Raspberry Pi', 'MQTT', 'Microcontroller'],
     },
     {
-        icon: '🖥️',
+        icon: HardDrives,
         title: 'IT & System Engineering',
         related: ['SQL', 'PostgreSQL', 'Firebase'],
     },
@@ -76,34 +77,34 @@ const HOBBIES = [
     {
         category: 'Sports',
         th: 'กีฬา',
-        icon: '🏆',
+        icon: Trophy,
         tone: 'gold',
         items: [
-            { emoji: '⚽', label: 'ฟุตบอล' },
-            { emoji: '🥅', label: 'ฟุตซอล' },
-            { emoji: '🏐', label: 'วอลเลย์บอล' },
-            { emoji: '🏸', label: 'แบดมินตัน' },
+            { icon: SoccerBall, label: 'ฟุตบอล' },
+            { icon: SneakerMove, label: 'ฟุตซอล' },
+            { icon: Volleyball, label: 'วอลเลย์บอล' },
+            { icon: Racquet, label: 'แบดมินตัน' },
         ],
     },
     {
         category: 'Music',
         th: 'ดนตรี',
-        icon: '🎵',
+        icon: MusicNotes,
         tone: 'light',
         items: [
-            { emoji: '🎸', label: 'กีตาร์' },
-            { emoji: '🥁', label: 'กลอง' },
+            { icon: Guitar, label: 'กีตาร์' },
+            { icon: Metronome, label: 'กลอง' },
         ],
     },
     {
         category: 'Outdoor & Giving',
         th: 'กิจกรรม',
-        icon: '🌿',
+        icon: Mountains,
         tone: 'navy',
         items: [
-            { emoji: '🌲', label: 'เที่ยวป่า' },
-            { emoji: '🥾', label: 'เดินป่า' },
-            { emoji: '🎁', label: 'แจกของตามแถบชนบท' },
+            { icon: Tree, label: 'เที่ยวป่า' },
+            { icon: Boot, label: 'เดินป่า' },
+            { icon: Gift, label: 'แจกของตามแถบชนบท' },
         ],
     },
 ];
@@ -183,7 +184,7 @@ function Home() {
                 <div className="container hero-content">
                     <div className="hero-text">
                         <p className="pill-label animate-fade-in-up delay-1">
-                            <span className="pill-emoji" aria-hidden="true">👋</span> Welcome to my Portfolio
+                            <span className="pill-emoji" aria-hidden="true"><HandWaving /></span> Welcome to my Portfolio
                         </p>
                         <h1 className="hero-name animate-fade-in-up delay-2">
                             <BouncyText text="Poopha" />{' '}
@@ -261,7 +262,7 @@ function Home() {
                     <div className="about-grid">
                         <Reveal className="about-card card-edu" delay={150}>
                             <div className="about-card-head">
-                                <span className="about-card-icon" aria-hidden="true">🎓</span>
+                                <span className="about-card-icon" aria-hidden="true"><GraduationCap /></span>
                                 <h3>Education</h3>
                             </div>
                             <p>
@@ -277,7 +278,7 @@ function Home() {
 
                         <Reveal className="about-card card-goal" delay={270}>
                             <div className="about-card-head">
-                                <span className="about-card-icon" aria-hidden="true">🎯</span>
+                                <span className="about-card-icon" aria-hidden="true"><Target /></span>
                                 <h3>Goals</h3>
                             </div>
                             <p>ต้องการพัฒนาทักษะด้านการเขียนโปรแกรมและสร้างผลงานที่มีคุณค่า</p>
@@ -285,7 +286,7 @@ function Home() {
 
                         <Reveal className="about-card card-skill" delay={390}>
                             <div className="about-card-head">
-                                <span className="about-card-icon" aria-hidden="true">💻</span>
+                                <span className="about-card-icon" aria-hidden="true"><Code /></span>
                                 <h3>Skills</h3>
                             </div>
                             <div className="skill-groups">
@@ -323,7 +324,7 @@ function Home() {
                         {INTERNSHIP_INTERESTS.map((item, i) => (
                             <Reveal as="li" key={item.title} className="internship-card" delay={200 + i * 110}>
                                 <span className="internship-num" aria-hidden="true">0{i + 1}</span>
-                                <span className="internship-icon" aria-hidden="true">{item.icon}</span>
+                                <span className="internship-icon" aria-hidden="true"><item.icon /></span>
                                 <h3>{item.title}</h3>
                                 <ul className="chip-list">
                                     {item.related.map((r) => (
@@ -366,7 +367,7 @@ function Home() {
                                 delay={200 + i * 130}
                             >
                                 <div className="hobby-card-head">
-                                    <span className="hobby-card-icon" aria-hidden="true">{group.icon}</span>
+                                    <span className="hobby-card-icon" aria-hidden="true"><group.icon /></span>
                                     <div>
                                         <h3>{group.category}</h3>
                                         <span className="hobby-card-th">{group.th}</span>
@@ -378,7 +379,7 @@ function Home() {
                                 <ul className="hobby-chips">
                                     {group.items.map((item) => (
                                         <li key={item.label} className="hobby-chip">
-                                            <span className="hobby-chip-emoji" aria-hidden="true">{item.emoji}</span>
+                                            <span className="hobby-chip-emoji" aria-hidden="true"><item.icon /></span>
                                             {item.label}
                                         </li>
                                     ))}

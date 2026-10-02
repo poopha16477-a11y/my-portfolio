@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Barbell, Books, Buildings, Globe, HandHeart, RocketLaunch } from '@phosphor-icons/react';
 import Lightbox from '../components/Lightbox';
 import PageHeader from '../components/PageHeader';
 import Reveal from '../components/Reveal';
@@ -11,7 +12,7 @@ const activitiesData = [
         title: 'เครื่องออกกำลังกายสำหรับขา',
         category: 'project',
         date: '2569',
-        icon: '🦵',
+        icon: Barbell,
         image: '/projects/leg-exercise-machine.webp',
         tag: 'Project',
         description: 'เครื่องปั่นขาอัตโนมัติสำหรับผู้สูงอายุและผู้ป่วยที่กล้ามเนื้อขาอ่อนแรง ควบคุมผ่านหน้าจอสัมผัส ปรับความเร็วได้ 5 ระดับ และวัดอัตราการเต้นของหัวใจได้',
@@ -23,7 +24,7 @@ const activitiesData = [
         title: 'อบรม Web Development',
         category: 'training',
         date: '2566',
-        icon: '📚',
+        icon: Books,
         tag: 'Training',
         description: 'เข้าร่วมอบรมการพัฒนาเว็บแอปพลิเคชันด้วย React และ REST API',
         detail: 'เรียนรู้การใช้ React Router, Form Handling, และการเชื่อมต่อกับ Backend API',
@@ -33,7 +34,7 @@ const activitiesData = [
         title: 'กิจกรรมอาสาประจำปี',
         category: 'volunteer',
         date: 'ทุกปี',
-        icon: '🤝',
+        icon: HandHeart,
         image: '/projects/volunteer-2.webp',
         imageStyle: 'photo',
         tag: 'Volunteer',
@@ -55,7 +56,7 @@ const activitiesData = [
         title: 'AMS — ระบบจัดการหอพัก',
         category: 'project',
         date: '2568',
-        icon: '🏢',
+        icon: Buildings,
         image: '/projects/ams-admin-dashboard.webp',
         imageStyle: 'screenshot',
         tag: 'Project',
@@ -81,7 +82,7 @@ const activitiesData = [
         title: 'เว็บไซต์ Portfolio',
         category: 'project',
         date: '2566',
-        icon: '🌐',
+        icon: Globe,
         tag: 'Project',
         description: 'ออกแบบและพัฒนาเว็บไซต์ Portfolio ส่วนตัวด้วย React + Vite',
         detail: 'ใช้ความรู้ที่เรียนมาทั้งหมด: Components, State, Effects, Routing, Forms มาสร้างเว็บไซต์นี้',
@@ -123,7 +124,7 @@ function Activities() {
     return (
         <div className="activities-page">
             <div className="container section">
-                <PageHeader emoji="🚀" label="กิจกรรม" title="Activities">
+                <PageHeader icon={RocketLaunch} label="กิจกรรม" title="Activities">
                     กิจกรรมและโปรเจคที่ฉันเคยเข้าร่วมและทำ
                 </PageHeader>
 
@@ -163,7 +164,7 @@ function Activities() {
                                 {item.image ? (
                                     <img src={item.image} alt={item.title} className="activity-card-photo" loading="lazy" />
                                 ) : (
-                                    <span className="activity-card-emoji" aria-hidden="true">{item.icon}</span>
+                                    <span className="activity-card-emoji" aria-hidden="true"><item.icon /></span>
                                 )}
                                 <span className="activity-card-tag">{item.tag}</span>
                             </div>

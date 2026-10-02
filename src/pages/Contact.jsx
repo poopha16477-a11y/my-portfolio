@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ChatsCircle, Confetti, EnvelopeOpen, EnvelopeSimple, GithubLogo, MapPin, PaperPlaneTilt, PencilSimpleLine, Phone } from '@phosphor-icons/react';
 import emailjs from '@emailjs/browser';
 import PageHeader from '../components/PageHeader';
 import Reveal from '../components/Reveal';
@@ -88,7 +89,7 @@ function Contact() {
     return (
         <div className="contact-page">
             <div className="container section">
-                <PageHeader emoji="💌" label="ติดต่อ" title="Contact">
+                <PageHeader icon={ChatsCircle} label="ติดต่อ" title="Contact">
                     สนใจติดต่อหรือสอบถามข้อมูลเพิ่มเติม<br />
                     สามารถติดต่อได้ผ่านช่องทางด้านล่าง
                 </PageHeader>
@@ -97,7 +98,7 @@ function Contact() {
                     {/* Contact Info */}
                     <div className="contact-info">
                         <Reveal className="contact-item chunky" delay={0}>
-                            <div className="contact-item-icon" aria-hidden="true">📧</div>
+                            <div className="contact-item-icon" aria-hidden="true"><EnvelopeSimple /></div>
                             <div className="contact-item-text">
                                 <h3>Email</h3>
                                 <p>
@@ -110,7 +111,7 @@ function Contact() {
                         </Reveal>
 
                         <Reveal className="contact-item chunky" delay={100}>
-                            <div className="contact-item-icon" aria-hidden="true">📱</div>
+                            <div className="contact-item-icon" aria-hidden="true"><Phone /></div>
                             <div className="contact-item-text">
                                 <h3>Phone</h3>
                                 <p>
@@ -120,7 +121,7 @@ function Contact() {
                         </Reveal>
 
                         <Reveal className="contact-item chunky" delay={200}>
-                            <div className="contact-item-icon" aria-hidden="true">📍</div>
+                            <div className="contact-item-icon" aria-hidden="true"><MapPin /></div>
                             <div className="contact-item-text">
                                 <h3>Location</h3>
                                 <p>อ.บางใหญ่ จ.นนทบุรี</p>
@@ -128,7 +129,7 @@ function Contact() {
                         </Reveal>
 
                         <Reveal className="contact-item chunky" delay={300}>
-                            <div className="contact-item-icon" aria-hidden="true">🔗</div>
+                            <div className="contact-item-icon" aria-hidden="true"><GithubLogo /></div>
                             <div className="contact-item-text">
                                 <h3>GitHub</h3>
                                 <p className="social-links">
@@ -143,7 +144,7 @@ function Contact() {
                     {/* Contact Form — สไลด์ 11 - Controlled Components */}
                     <Reveal className="contact-form-wrapper chunky" delay={150}>
                         <span className="form-sticker" aria-hidden="true">Say hi!</span>
-                        <h3>Send me a message ✍️</h3>
+                        <h3>Send me a message <PencilSimpleLine className="inline-icon" aria-hidden="true" /></h3>
 
                         {status === 'sent' || status === 'mailto' ? (
                             <div className="form-success" role="status">
@@ -157,7 +158,7 @@ function Contact() {
                                         ))}
                                     </div>
                                 )}
-                                <div className="success-icon" aria-hidden="true">{status === 'sent' ? '🎉' : '📨'}</div>
+                                <div className="success-icon" aria-hidden="true">{status === 'sent' ? <Confetti /> : <EnvelopeOpen />}</div>
                                 <p>
                                     {status === 'sent'
                                         ? 'ส่งข้อความสำเร็จ! ขอบคุณที่ติดต่อมา'
@@ -230,7 +231,7 @@ function Contact() {
 
                                 <button type="submit" className="btn btn-primary form-submit" disabled={status === 'sending'}>
                                     {status === 'sending' ? 'กำลังส่ง...' : 'ส่งข้อความ'}{' '}
-                                    <span className="send-icon" aria-hidden="true">✈</span>
+                                    <span className="send-icon" aria-hidden="true"><PaperPlaneTilt /></span>
                                 </button>
                             </form>
                         )}

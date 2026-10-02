@@ -1,4 +1,5 @@
 import './Footer.css';
+import { Heart } from '@phosphor-icons/react';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -11,7 +12,7 @@ function Footer() {
         <footer className="footer">
             <div className="container footer-inner">
                 <p className="footer-text">
-                    © {currentYear} <span>Portfolio</span>. Made with <span className="heart" aria-label="love">♥</span> &amp; React
+                    © {currentYear} <span>Portfolio</span>. Made with <Heart className="heart" weight="fill" aria-label="love" /> &amp; React
                 </p>
                 <div className="footer-links">
                     <a href="https://github.com/poopha16477-a11y" target="_blank" rel="noopener noreferrer">
