@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Barbell, Books, Buildings, Globe, HandHeart, RocketLaunch } from '@phosphor-icons/react';
+import { Barbell, Buildings, Globe, HandHeart, RocketLaunch } from '@phosphor-icons/react';
 import Lightbox from '../components/Lightbox';
 import PageHeader from '../components/PageHeader';
 import Reveal from '../components/Reveal';
@@ -18,16 +18,6 @@ const activitiesData = [
         description: 'เครื่องปั่นขาอัตโนมัติสำหรับผู้สูงอายุและผู้ป่วยที่กล้ามเนื้อขาอ่อนแรง ควบคุมผ่านหน้าจอสัมผัส ปรับความเร็วได้ 5 ระดับ และวัดอัตราการเต้นของหัวใจได้',
         detail: 'ใช้มอเตอร์ DC 24V 350W ติดเกียร์ ควบคุมความเร็วด้วย PWM ผ่าน Arduino Uno นับรอบการปั่นด้วย Proximity Sensor มี Raspberry Pi เป็น Server กลาง สื่อสารกับอุปกรณ์ผ่าน MQTT ด้วย Python และเก็บข้อมูลผู้ใช้กับสถานะการออกกำลังกายด้วย SQL (โครงงานทีม 2 คน)',
         tech: ['Arduino', 'Raspberry Pi', 'Python', 'MQTT', 'SQL'],
-    },
-    {
-        id: 2,
-        title: 'อบรม Web Development',
-        category: 'training',
-        date: '2566',
-        icon: Books,
-        tag: 'Training',
-        description: 'เข้าร่วมอบรมการพัฒนาเว็บแอปพลิเคชันด้วย React และ REST API',
-        detail: 'เรียนรู้การใช้ React Router, Form Handling, และการเชื่อมต่อกับ Backend API',
     },
     {
         id: 3,
@@ -96,7 +86,6 @@ const activitiesData = [
 const categories = [
     { key: 'all', label: 'All' },
     { key: 'project', label: 'Projects' },
-    { key: 'training', label: 'Training' },
     { key: 'volunteer', label: 'Volunteer' },
 ];
 

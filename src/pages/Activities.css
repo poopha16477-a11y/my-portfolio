@@ -93,10 +93,6 @@
     background-color: var(--gold);
 }
 
-.cat-training .activity-card-image {
-    background-color: var(--bg-secondary);
-}
-
 .cat-volunteer .activity-card-image {
     background-color: var(--bg-card);
 }
