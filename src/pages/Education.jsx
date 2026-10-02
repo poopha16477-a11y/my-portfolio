@@ -1,10 +1,10 @@
 import PageHeader from '../components/PageHeader';
-import { Backpack, BookOpen, GraduationCap, Lightning } from '@phosphor-icons/react';
+import { Backpack, BookOpen, GraduationCap, Lightning, Plug, Truck } from '@phosphor-icons/react';
 import Reveal from '../components/Reveal';
 import './Education.css';
 
 // สไลด์ 05 - Component: แยก TimelineItem เป็น Component ย่อย รับ props
-function TimelineItem({ year, title, institution, description, icon: Icon, current, delay }) {
+function TimelineItem({ year, title, institution, description, roles, icon: Icon, current, delay }) {
     return (
         <Reveal className="timeline-item" delay={delay}>
             <div className="timeline-dot" aria-hidden="true"><Icon /></div>
@@ -15,7 +15,17 @@ function TimelineItem({ year, title, institution, description, icon: Icon, curre
                 </div>
                 <h3>{title}</h3>
                 <p className="institution">{institution}</p>
-                <p>{description}</p>
+                {description && <p>{description}</p>}
+                {roles && (
+                    <ul className="timeline-roles">
+                        {roles.map((role) => (
+                            <li key={role.period}>
+                                <span className="role-title">{role.title}</span>
+                                <span className="role-period">{role.period}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
         </Reveal>
     );
@@ -47,12 +57,34 @@ const educationData = [
     },
 ];
 
+// ประสบการณ์การทำงาน (ล่าสุดอยู่บน)
+const experienceData = [
+    {
+        year: '2566 — 2569',
+        title: 'บริษัท อักษร โลจิสติกส์',
+        institution: 'ทำงานช่วงมีนาคม – พฤษภาคม ต่อเนื่อง 4 ปี',
+        icon: Truck,
+        roles: [
+            { title: 'พนักงานฝ่ายกระจายสินค้า', period: 'มี.ค. – พ.ค. 2569' },
+            { title: 'พนักงานฝ่ายกระจายสินค้า', period: 'มี.ค. – พ.ค. 2568' },
+            { title: 'พนักงานฝ่ายกระจายสินค้า', period: 'มี.ค. – พ.ค. 2567' },
+            { title: 'พนักงานฝ่ายจัดส่ง', period: 'มี.ค. – มิ.ย. 2566' },
+        ],
+    },
+    {
+        year: '2564',
+        title: 'การไฟฟ้านครหลวง',
+        institution: 'นักศึกษาฝึกงาน',
+        icon: Plug,
+    },
+];
+
 function Education() {
     return (
         <div className="education-page">
             <div className="container section">
                 <PageHeader icon={Backpack} label="การศึกษา" title="Education">
-                    ประวัติการศึกษาของฉัน ตั้งแต่อดีตจนถึงปัจจุบัน
+                    ประวัติการศึกษาและประสบการณ์การทำงานของฉัน
                 </PageHeader>
 
                 <div className="timeline">
@@ -68,6 +100,28 @@ function Education() {
                             delay={index * 120}
                         />
                     ))}
+                </div>
+
+                {/* Work Experience */}
+                <div className="experience-block">
+                    <Reveal className="experience-head">
+                        <span className="section-label">ประสบการณ์การทำงาน</span>
+                        <h2 className="section-title">Work Experience</h2>
+                    </Reveal>
+
+                    <div className="timeline">
+                        {experienceData.map((item, index) => (
+                            <TimelineItem
+                                key={item.title}
+                                year={item.year}
+                                title={item.title}
+                                institution={item.institution}
+                                roles={item.roles}
+                                icon={item.icon}
+                                delay={index * 120}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
